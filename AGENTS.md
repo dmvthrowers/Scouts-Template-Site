@@ -19,7 +19,8 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
    - optional: brand colors and a public Google Calendar embed URL
 
    Never invent facts. Leave a value empty (`""`), or use "to be announced", rather than guess.
-2. **Edit `site.jsonc` only** for content. Keep `//` comments on their own lines. Change preset
+2. **Edit `site.jsonc` only** for content. `examples/pack-1125.jsonc` is a complete real-world
+   example; it's a good model for how fields are filled in. Keep `//` comments on their own lines. Change preset
    wording by adding the same key to `site.jsonc`, not by editing the preset.
 3. **Build and check locally:** `python3 build.py && python3 scripts/check_site.py`. Fix every
    WARNING the build prints (contrast, missing photos, bad dates) and every check failure.
@@ -50,6 +51,8 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
 - **Pages:** each page is one `page_<slug>()` method in `build.py`. To add a page, add a method
   and an entry in `self.pages`.
 - **Extra content:** `content/<slug>.html` is appended to that page. Plain HTML only.
+- **Showcase:** `showcase/`, `examples/`, and `scripts/build_showcase.py` only run in the original
+  template repository. Ignore them (or delete them) in a user's copy.
 - **No dependencies:** keep `build.py` and `scripts/check_site.py` standard-library Python 3.9+.
 
 ## Useful commands

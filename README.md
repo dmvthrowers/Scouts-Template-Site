@@ -10,6 +10,7 @@ monthly fees.
 - **Time:** about 15–30 minutes from "Use this template" to a live site.
 - **Skills:** you can edit a text file in your web browser. An AI coding agent can do the whole thing (see [AGENTS.md](AGENTS.md)).
 - **License:** [Unlicense](LICENSE), public domain. Copy, change, and share it however you like.
+- **See it first:** the [showcase and deploy guide](https://dmvthrowers.club/scout-site-template/) has live examples, including a real Cub Scout pack.
 
 **What you get:** 10 pages (Home, About, Join, Groups, Calendar, Gallery, Resources, FAQ, Contact,
 Privacy & Safety) plus a "page not found" page. Upcoming events hide themselves once they've passed.
@@ -53,6 +54,9 @@ Open **`site.jsonc`**, click the **pencil icon** to edit, and work top to bottom
 5. **`events`**: dates as `YYYY-MM-DD`. Past events disappear automatically.
 
 When you're done, click **Commit changes**.
+
+> **Shortcut:** the [`examples/`](examples/) folder has finished settings files. `pack-1125.jsonc`
+> is a real Cub Scout pack. Copy one over `site.jsonc` and change the details.
 
 ### 4. Watch it go live
 Open the **Actions** tab. "Build and deploy" takes about a minute. When it shows a green check,
@@ -250,6 +254,8 @@ build.py                ← builds _site/ from all of the above (standard Python
 scripts/check_site.py   ← checks the built site (links, accessibility, security)
 .github/workflows/deploy.yml  ← builds, checks, and publishes on every change, plus weekly
 AGENTS.md               ← instructions for AI coding agents
+examples/               ← finished settings files to copy (a real pack plus demos)
+showcase/, scripts/build_showcase.py  ← the template's own showcase page (safe to delete in your copy)
 ```
 
 Pull requests with improvements, new presets, or translations are welcome.

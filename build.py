@@ -59,8 +59,8 @@ def merge(base, override):
     return override
 
 
-def load_config():
-    site = load_jsonc(ROOT / "site.jsonc")
+def load_config(config_path=ROOT / "site.jsonc"):
+    site = load_jsonc(config_path)
     name = site.get("preset") or "kids-club"
     preset_path = ROOT / "presets" / f"{name}.json"
     if not preset_path.exists():
@@ -726,7 +726,7 @@ class Site:
                       {"src": "emblem.svg", "sizes": "any", "type": "image/svg+xml"}]}, indent=2))
         for slug, _ in self.footer_pages + [("404", "")]:
             title, desc, body, ld = getattr(self, f"page_{slug}")()
-            robots = "noindex, follow" if slug == "404" else "index, follow"
+            robots = "noindex, follow" if slug == "404" or getattr(self, "noindex", False) else "index, follow"
             (OUT / f"{slug}.html").write_text(self.layout(slug, title, desc, body, ld, robots), encoding="utf-8")
         robots = "User-agent: *\nAllow: /\n"
         if self.base_url:
@@ -740,23 +740,30 @@ class Site:
                             "(Automatic on GitHub Pages; or set site.url in site.jsonc.)")
         (OUT / "robots.txt").write_text(robots)
         # The base path lets scripts/check_site.py resolve 404.html's absolute links.
-        (ROOT / ".build-base-path").write_text(self.base_path)
+        if OUT == ROOT / "_site":
+            (ROOT / ".build-base-path").write_text(self.base_path)
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--base-url", default=os.environ.get("SITE_URL", ""), help="public address, e.g. https://example.org/")
     ap.add_argument("--serve", action="store_true", help="preview at http://localhost:8000/ after building")
+    ap.add_argument("--config", default="site.jsonc", help="settings file (default: site.jsonc)")
+    ap.add_argument("--out", default="_site", help="output folder (default: _site)")
+    ap.add_argument("--noindex", action="store_true", help="ask search engines not to list the site (demos)")
     args = ap.parse_args()
-    cfg = load_config()
+    global OUT
+    OUT = (ROOT / args.out).resolve()
+    cfg = load_config((ROOT / args.config).resolve())
     base_url = (args.base_url or cfg["site"].get("url") or "").strip()
     if base_url and not base_url.endswith("/"):
         base_url += "/"
     if base_url and urlparse(base_url).scheme != "https":
         warnings.append(f"Site URL {base_url} should start with https://")
     site = Site(cfg, base_url)
+    site.noindex = args.noindex
     site.build()
-    print(f"Built {cfg.get('preset_name', cfg.get('preset'))} site for {site.name} into _site/"
+    print(f"Built {cfg.get('preset_name', cfg.get('preset'))} site for {site.name} into {OUT.relative_to(ROOT)}/"
           + (f" (address: {base_url})" if base_url else ""))
     for w in dict.fromkeys(warnings):          # each warning once, in order
         print("  WARNING:", w)

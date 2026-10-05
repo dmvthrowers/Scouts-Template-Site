@@ -1,0 +1,87 @@
+// =====================================================================
+//  EXAMPLE: Cub Scout Pack 1125, Dumfries, Virginia (a real pack).
+//  This is the settings file that builds the example at examples/pack-1125/
+//  on this template's showcase site. Copy it as a starting point for your own pack:
+//  save it over site.jsonc and change the details.
+//  The pack's own live site: https://dmvthrowers.club/pack1125-dumfries/
+// =====================================================================
+{
+  "preset": "cub-scouts",
+
+  "site": {
+    "url": "",
+    "language": "en",
+    "date_format": "us",
+    "source_url": "https://github.com/dmvthrowers/scout-site-template"
+  },
+
+  "group": {
+    "name": "Cub Scout Pack 1125",
+    "number": "1125",
+    "tagline": "Leaders and Trailblazers",
+    "city": "Dumfries",
+    "region": "VA",
+    "founded": "November 2025",
+    "description": "A family-centered Cub Scout pack in Dumfries, Virginia, serving families at Covington-Harper, Swans Creek, Triangle, and Leesylvania Elementary Schools.",
+    "serves": "We're a secular pack, open to all families, serving Covington-Harper, Swans Creek, Triangle, and Leesylvania Elementary Schools."
+  },
+
+  "meetings": {
+    "summary": "Pack meetings 1st Thursday, den meetings 3rd Thursday, 6:30–7:30 PM",
+    "location": "Covington-Harper Elementary School auditorium, Dumfries VA",
+    "season": "October through January"
+  },
+
+  "contact": {
+    "email": "admin@pack1125.org",
+    "phone": "",
+    "social": []
+  },
+
+  "cost": {
+    "summary": "To be announced",
+    "details": "Pack dues for this year are to be announced; email us for current rates. On top of pack dues, Scouting America registration is $85, the NCAC participation fee is $80 for first-year Cub Scouts, and adult registration is $65. Financial aid is available, and no Scout is turned away for cost.",
+    "aid_url": "https://ncacscouting.org/resources/financial-support/"
+  },
+
+  "charter": { "name": "Future Kings, Inc.", "url": "https://www.future-kings.org/" },
+  "council": { "name": "National Capital Area Council, Prince William District", "url": "https://ncacscouting.org" },
+
+  "leaders": [
+    { "role": "Cubmaster", "name": "Clive Vella" },
+    { "role": "Committee Chair", "name": "Dr. Neville Welch" },
+    { "role": "Website & Technical Support", "name": "Brandon Rogers" },
+    { "role": "Den Leaders & Committee Members", "open": true }
+  ],
+
+  "events": [
+    { "date": "2026-10-31", "title": "Trick or Treat", "details": "Location to be announced." },
+    { "date": "2026-11-05", "title": "Pack Meeting: Bottle Rocket STEM", "details": "6:30 PM." },
+    { "date": "2026-12-17", "title": "Holiday Potluck", "details": "6:30 PM at Covington-Harper ES." },
+    { "date": "2027-05-14", "title": "Spring Overnight Campout", "details": "May 14–16 at Camp Snyder." }
+  ],
+
+  "calendar": { "embed_url": "" },
+  "gallery": [],
+
+  // Pack 1125's own four pillars replace the preset's.
+  "program": {
+    "pillars": [
+      { "title": "Leadership & Trailblazing", "text": "Scouts take initiative, try new paths, and learn to lead, starting with themselves." },
+      { "title": "Character", "text": "Integrity, respect, and accountability in everything we do." },
+      { "title": "Core Values", "text": "The Scout Oath and Law, lived out day by day." },
+      { "title": "Honor", "text": "Doing what's right, even when it's difficult." }
+    ]
+  },
+
+  "links": [
+    { "title": "Webelos Yo-Yo Adventure", "text": "Webelos can earn the Yo-yo elective adventure; Duncan Toys has free how-to videos.", "url": "https://www.scouting.org/cub-scout-adventures/yo-yo/", "label": "Adventure requirements" },
+    { "title": "DMV Throwers Yo-Yo Club", "text": "A free yo-yo club for DC, Maryland, and Virginia, and a great place to practice.", "url": "https://dmvthrowers.club/", "label": "dmvthrowers.club" }
+  ],
+
+  "faq_extra": [
+    { "q": "Is Pack 1125 affiliated with a religion?", "a": "No. Pack 1125 is a secular pack, open to all families. We're chartered by Future Kings, Inc., a Dumfries-based nonprofit." }
+  ],
+
+  "theme": { "primary": "#003366", "accent": "#ffcc00", "background": "#fffef7", "ink": "#22303f" }
+}

@@ -18,9 +18,11 @@ from pathlib import Path
 from urllib.parse import urlparse, unquote
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = ROOT / "_site"
+args = sys.argv[1:]
+# Optional: check_site.py [SITE_DIR [BASE_PATH]] (used for the showcase's example sites)
+SITE = (ROOT / args[0]).resolve() if args else ROOT / "_site"
 base_file = ROOT / ".build-base-path"
-BASE = base_file.read_text().strip() if base_file.exists() else "/"
+BASE = args[1] if len(args) > 1 else (base_file.read_text().strip() if base_file.exists() else "/")
 errors = []
 
 

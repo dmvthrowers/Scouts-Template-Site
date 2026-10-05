@@ -1,0 +1,119 @@
+// DEMO: a fictional Girl Scout troop built from the "girl-scouts" preset. Names and details are made up.
+// =====================================================================
+//  YOUR SITE SETTINGS: this is the main file you edit.
+//  Lines starting with // are notes and are ignored.
+//  Keep the quotes and commas. When in doubt, copy an existing line.
+//  After you save (commit) on GitHub, the site rebuilds in about a minute.
+// =====================================================================
+{
+  // STEP 1: Pick a starting preset. It fills in group names, age levels,
+  // join steps, FAQ, links, and safety rules. Choices:
+  //   "kids-club"   - any kids club or youth group (default)
+  //   "cub-scouts"  - Cub Scout pack (Scouting America)
+  //   "scouts-bsa"  - Scouts BSA troop (Scouting America)
+  //   "girl-scouts" - Girl Scout troop (Girl Scouts of the USA)
+  // Anything you set below overrides the preset.
+  "preset": "girl-scouts",
+
+  "site": {
+    // Your site's address. Leave "" on GitHub Pages; it's filled in automatically.
+    // Set it if you use your own domain, e.g. "https://troop123.org/"
+    "url": "",
+    // Language code for the page (e.g. "en", "es", "fr")
+    "language": "en",
+    // Date style: "us" = Sat, Nov 7, 2026   "intl" = Sat 7 Nov 2026
+    "date_format": "us",
+    // Optional link in the footer to this site's source code. "" hides it.
+    "source_url": "https://github.com/dmvthrowers/scout-site-template"
+  },
+
+  "group": {
+    // Full name, as you want it in the page title and header
+    "name": "Girl Scout Troop 7890 (Demo)",
+    // Unit number if you have one ("1125" for Pack 1125). "" if none.
+    "number": "7890",
+    // Short motto or tagline
+    "tagline": "Courage, Confidence, Character",
+    "city": "Springfield",
+    // State, province, or region
+    "region": "VA",
+    // Year started ("" to hide)
+    "founded": "2026",
+    // One or two sentences for the home page and search results
+    "description": "A multi-level Girl Scout troop where girls explore STEM, the outdoors, and leadership.",
+    // Who you serve, e.g. which schools or neighborhoods ("" to hide)
+    "serves": "Families in the Maple Street and Oak Hill neighborhoods."
+  },
+
+  "meetings": {
+    // How often and when
+    "summary": "2nd and 4th Tuesdays, 6:30–7:30 PM",
+    // Where. Keep it general (building name + town) for kids' privacy.
+    "location": "Springfield Community Center, Springfield VA",
+    // Season or months you meet ("" to hide)
+    "season": "September through May"
+  },
+
+  "contact": {
+    // Use a shared group email, not a personal one
+    "email": "hello@example.org",
+    // Optional phone. Think twice before publishing a personal cell number.
+    "phone": "",
+    // Optional social links: { "name": "Facebook", "url": "https://..." }
+    "social": []
+  },
+
+  "cost": {
+    // One line for the home page, e.g. "$60 per year" or "Free"
+    "summary": "Varies; ask us",
+    // Longer explanation for the Join page and FAQ
+    "details": "National membership fees plus small unit dues. Financial help is available, and no youth is ever turned away for cost.",
+    // Link to financial aid or scholarships ("" to hide)
+    "aid_url": ""
+  },
+
+  // Sponsoring or chartering organization ("" to hide)
+  "charter": { "name": "", "url": "" },
+
+  // Council, district, or parent organization ("" to hide)
+  "council": { "name": "", "url": "" },
+
+  // Adult leaders. Only list people who said yes to being on the site.
+  // An entry with "open": true shows a "volunteer with us" card.
+  "leaders": [
+    { "role": "Troop Leader", "name": "Alex Example" },
+    { "role": "Co-Leaders", "open": true }
+  ],
+
+  // Upcoming events. Use "YYYY-MM-DD" dates; past events hide automatically.
+  // Use "date": "" for "date to be announced".
+  "events": [
+    { "date": "2026-11-07", "title": "Fall Hike", "details": "Meet at the trailhead at 9 AM." },
+    { "date": "2026-12-15", "title": "Holiday Service Project", "details": "Making cards for neighbors." },
+    { "date": "", "title": "Spring Campout", "details": "Date to be announced." }
+  ],
+
+  // Google Calendar (optional). Paste the "embed" URL from Google Calendar settings:
+  // Settings and sharing > Integrate calendar > Embed code (just the https://... part).
+  // The calendar must be public. Leave "" to show only the events list.
+  "calendar": { "embed_url": "" },
+
+  // Photos. Put files in assets/images/gallery/. Only post kids with written permission.
+  // { "src": "images/gallery/hike.jpg", "alt": "Kids on a forest trail", "caption": "Fall Hike" }
+  "gallery": [],
+
+  // Extra links for the Resources page (added after the preset's links)
+  // { "title": "Our Sign-up Form", "text": "Register for events.", "url": "https://...", "label": "Sign up" }
+  "links": [],
+
+  // Extra FAQ entries (added after the preset's FAQ)
+  // { "q": "Question?", "a": "Answer." }
+  "faq_extra": [],
+
+  // Colors (any CSS color). Delete a line to use the preset's color.
+  // The build warns you if text would be hard to read.
+  "theme": {
+    // "primary": "#155e75",
+    // "accent": "#f59e0b"
+  }
+}
