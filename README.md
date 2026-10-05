@@ -1,12 +1,13 @@
 # Youth Group Website Template
 
-A free, fast, mobile-friendly website for a **Scout pack or troop, Girl Scout troop, or any kids club**.
+A free, fast, mobile-friendly website for a **Scout pack or troop, Girl Scout troop, youth sports club
+(soccer, baseball, football, basketball…), or any kids club**.
 Edit one settings file, and GitHub builds and publishes the site for you. No coding, servers, or
 monthly fees.
 
-![The template with each of the four presets](.github/preview.png)
+![The template with four of its presets](.github/preview.png)
 
-- **Cost:** $0 on GitHub Pages. An optional custom domain like `troop123.org` is about $10–20/year.
+- **Cost:** $0 on GitHub Pages (or Cloudflare Pages / Vercel). An optional custom domain like `troop123.org` is about $10–20/year.
 - **Time:** about 15–30 minutes from "Use this template" to a live site.
 - **Skills:** you can edit a text file in your web browser. An AI coding agent can do the whole thing (see [AGENTS.md](AGENTS.md)).
 - **License:** [Unlicense](LICENSE), public domain. Copy, change, and share it however you like.
@@ -47,6 +48,15 @@ Open **`site.jsonc`**, click the **pencil icon** to edit, and work top to bottom
    | `cub-scouts` | Cub Scout pack (Scouting America) | Pack | Dens: Lion → Arrow of Light |
    | `scouts-bsa` | Scouts BSA troop (Scouting America) | Troop | Patrols and ranks: Scout → Eagle |
    | `girl-scouts` | Girl Scout troop (Girl Scouts of the USA) | Troop | Levels: Daisy → Ambassador |
+   | `sports-club` | Any youth sports club (use for sports not listed below) | Club | Teams by age |
+   | `soccer` | Youth soccer club | Club | Teams: U6 → U14 |
+   | `baseball` | Youth baseball or softball league | League | Divisions: Tee-Ball → Juniors |
+   | `football` | Youth flag or tackle football club | Club | Teams: Flag → Seniors |
+   | `basketball` | Youth basketball club | Club | Teams: Rookies → Seniors |
+
+   Sports presets list coaches as **Coaches & Volunteers**, include safety rules (SafeSport training,
+   concussion and weather policies), and link to the sport's national governing body. Check the age
+   groups, gear list, and safety rules against your own league's rules and change what differs.
 
 2. **`group`**: name, unit number, tagline, city, short description.
 3. **`meetings`**, **`contact`**, **`cost`**: when, where, a shared email address, and dues.
@@ -94,6 +104,7 @@ stays as it was until the problem is fixed.
 | Extra links on Resources | `site.jsonc` → `links` | |
 | Extra FAQ questions | `site.jsonc` → `faq_extra` | |
 | Group names, age levels, join steps, FAQ, safety text | `presets/<your preset>.json` | Or copy any section into `site.jsonc` to override it. |
+| Words like Club/Team, Leaders/Coaches, meetings/practices | `site.jsonc` → `terms` | e.g. `"terms": { "unit": "Team", "leaders": "Coaches", "meetings": "practices", "meeting": "practice", "visit": "Try a Practice" }`. See any sports preset for the full list. |
 | A whole extra section on a page | `content/<page>.html` | See [Adding your own content](#adding-your-own-content). |
 | Page layout or new pages | `build.py` | One short function per page. |
 | Fonts, spacing, look | `assets/style.css` | |
@@ -186,12 +197,60 @@ put on flyers. You can add one any time; the free address keeps working until yo
 
 The site is plain files. Anything that can run `python3 build.py` and serve the `_site/` folder works.
 
-| Host | Build command | Output folder | Notes |
+| Host | Cost | Address set up for you? | Notes |
 | --- | --- | --- | --- |
-| **GitHub Pages** (default) | automatic | automatic | Free for public repositories |
-| Cloudflare Pages | `python3 build.py` | `_site` | Free. Set the env var `SITE_URL` to your address |
-| Netlify | `python3 build.py` | `_site` | Free tier. Set `SITE_URL` |
-| Any web host / USB stick | run `python3 build.py` on your computer | upload `_site/` | Set `site.url` in `site.jsonc` |
+| **GitHub Pages** (default) | Free | Yes | Rebuilds weekly by itself, so past events drop off |
+| **Cloudflare Pages** | Free, any use | Set `SITE_URL` once | Fast worldwide; easy if your domain is already at Cloudflare |
+| **Vercel** | Free Hobby plan (non-commercial, personal use) | Yes | Settings come from `vercel.json`; read Vercel's plan terms |
+| Netlify | Free tier | Set `SITE_URL` | Build `python3 build.py`, publish `_site` |
+| Any web host / USB stick | — | Set `site.url` in `site.jsonc` | Run `python3 build.py` on your computer and upload `_site/` |
+
+All of them use the same `site.jsonc`. Your site works the same on each.
+
+### Cloudflare Pages (free)
+
+1. Make your own copy of this template on GitHub (Quick start, step 1). Skip step 2.
+2. Sign in at [dash.cloudflare.com](https://dash.cloudflare.com) (a free account is fine) and go to
+   **Workers & Pages → Create → Pages → Import an existing Git repository**. Connect GitHub and
+   pick your repository.
+3. Set up the build:
+   - **Framework preset:** None
+   - **Build command:** `python3 build.py && python3 scripts/check_site.py`
+   - **Build output directory:** `_site`
+   - **Environment variable:** `SITE_URL` = your address, e.g. `https://troop123.pages.dev/`
+     (the project name you chose, plus `.pages.dev`)
+4. Click **Save and Deploy**. In about a minute your site is live at `https://YOUR-PROJECT.pages.dev/`.
+   Every commit to `main` rebuilds it.
+5. **Custom domain (optional):** your project → **Custom domains → Set up a custom domain**. If the
+   domain is already on Cloudflare, it's one click; otherwise follow the DNS steps it shows. Then
+   change `SITE_URL` to the new address and click **Retry deployment** (or make any commit).
+
+### Vercel (free Hobby plan)
+
+1. Make your own copy of this template on GitHub (Quick start, step 1). Skip step 2.
+2. Sign in at [vercel.com](https://vercel.com) with your GitHub account and click
+   **Add New… → Project**. Import your repository.
+3. Leave the settings as they are. `vercel.json` already tells Vercel how to build
+   (`python3 build.py`) and where the site is (`_site`). Click **Deploy**.
+4. Your site is live at `https://YOUR-PROJECT.vercel.app/` in about a minute, and every commit to
+   `main` rebuilds it. You don't need to set `SITE_URL`: the build reads your address from Vercel.
+5. **Custom domain (optional):** your project → **Settings → Domains → Add**, then add the DNS
+   records Vercel shows at your registrar. The next build uses the new address automatically.
+
+Vercel's free Hobby plan is for non-commercial, personal use. Read Vercel's plan terms and check that
+your group fits, or use Cloudflare Pages, whose free plan has no such limit.
+
+### Notes for Cloudflare and Vercel
+
+- **Turn off the GitHub Pages workflow** so it doesn't show a red ✗ on every commit: in your repository,
+  **Actions → Build and deploy → ⋯ → Disable workflow**. (Or leave GitHub Pages on as a backup copy.)
+- **Past events** disappear when the site rebuilds. GitHub Pages rebuilds every week by itself; on
+  Cloudflare and Vercel, rebuild after an event passes by making any commit or clicking **Redeploy**.
+  To automate it, both hosts offer a "deploy hook" URL you can call on a schedule
+  ([Cloudflare](https://developers.cloudflare.com/pages/configuration/deploy-hooks/),
+  [Vercel](https://vercel.com/docs/deploy-hooks)).
+- **Preview builds:** both hosts also build a private preview for other branches and pull requests.
+  That's handy for trying changes before they go live.
 
 **Preview on your own computer** (needs [Python 3](https://www.python.org/downloads/)):
 
@@ -254,8 +313,10 @@ None of these are needed to launch. Each is small, free or cheap, and listed rou
 - **Trademarks:** "Scouting America", "Cub Scouts", "Scouts BSA", "Girl Scouts", and their logos,
   badges, and insignia belong to their organizations. **This template includes none of their logos
   or badges.** It uses program names only to describe what a unit does. If you add official marks,
-  follow your organization's brand guidelines for units. This template is independent and is not
-  affiliated with or endorsed by any scouting organization.
+  follow your organization's brand guidelines for units. The same goes for sports: league and
+  governing-body names and logos (for example Little League, AYSO, Pop Warner, US Youth Soccer) belong
+  to those organizations, so use them only if your club is a member and follows their rules. This
+  template is independent and is not affiliated with or endorsed by any scouting or sports organization.
 - **Facts change.** Program details in the presets (ranks, levels, links) were checked in October 2026.
   Fees aren't included because they change every year. Put yours in `site.jsonc`.
 
@@ -267,6 +328,7 @@ None of these are needed to launch. Each is small, free or cheap, and listed rou
 site.jsonc              ← your settings (start here)
 presets/                ← starting text for each kind of group
   kids-club.json  cub-scouts.json  scouts-bsa.json  girl-scouts.json
+  sports-club.json  soccer.json  baseball.json  football.json  basketball.json
 assets/                 ← copied to the site as-is
   style.css             ← look and layout (colors come from site.jsonc)
   site.js               ← phone menu (the only script)
@@ -275,6 +337,7 @@ content/                ← optional extra HTML for any page
 build.py                ← builds _site/ from all of the above (standard Python, no installs)
 scripts/check_site.py   ← checks the built site (links, accessibility, security)
 .github/workflows/deploy.yml  ← builds, checks, and publishes on every change, plus weekly
+vercel.json             ← build settings if you host on Vercel (ignored elsewhere)
 AGENTS.md               ← instructions for AI coding agents
 examples/               ← finished settings files to copy (a real pack plus demos)
 showcase/, scripts/build_showcase.py  ← the template's own showcase page (safe to delete in your copy)

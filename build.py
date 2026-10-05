@@ -388,7 +388,7 @@ class Site:
     <p class="lede">{esc(g.get("description", ""))}</p>
     <div class="btn-row">
       <a class="btn btn-accent" href="join.html">Join the {esc(t["unit"])}</a>
-      <a class="btn btn-ghost" href="contact.html">Visit a Meeting</a>
+      <a class="btn btn-ghost" href="contact.html">{esc(t.get("visit", "Visit a Meeting"))}</a>
     </div>
   </div>
 </section>
@@ -445,7 +445,7 @@ class Site:
                                f'<span class="who">Open — <a href="mailto:{esc(c["contact"]["email"])}?subject=Volunteering">volunteer with us</a></span></li>')
             else:
                 leaders.append(f'<li><span class="role">{esc(l["role"])}</span><span class="who">{esc(l.get("name", ""))}</span></li>')
-        leaders_html = (f'<h2>Our Leaders</h2>\n    <ul class="leader-list">{"".join(leaders)}</ul>'
+        leaders_html = (f'<h2>Our {esc(t.get("leaders", "Leaders"))}</h2>\n    <ul class="leader-list">{"".join(leaders)}</ul>'
                         if leaders else "")
         body = f"""{self.page_head(f"About the {t['unit']}", g.get("description", ""))}
 
@@ -533,18 +533,19 @@ class Site:
                          f'    <p class="muted center">Calendar not loading? Email <a href="mailto:{esc(c["contact"]["email"])}">'
                          f'{esc(c["contact"]["email"])}</a> for dates.</p>')
         season = f' We meet {esc(c["meetings"]["season"])}.' if c["meetings"].get("season") else ""
-        body = f"""{self.page_head("Calendar", "Meetings, events, and activities.")}
+        mtgs = self.terms.get("meetings", "meetings")
+        body = f"""{self.page_head("Calendar", f"{mtgs.capitalize()}, events, and activities.")}
 
 <section class="section">
   <div class="wrap narrow">
-    <h2>Regular Meetings</h2>
+    <h2>{esc(self.terms.get("meetings_title", "Regular Meetings"))}</h2>
     <p><strong>{esc(c["meetings"]["summary"])}</strong> at {esc(c["meetings"]["location"])}.{season}</p>
     <h2>Upcoming Events</h2>
     {self.event_list()}
     {frame}
   </div>
 </section>"""
-        return "Calendar", f"{self.name} calendar: meetings and upcoming events.", body, None
+        return "Calendar", f"{self.name} calendar: {mtgs} and upcoming events.", body, None
 
     def page_gallery(self):
         c = self.cfg
@@ -567,7 +568,8 @@ class Site:
                         f'height="{size[1]}" loading="lazy" decoding="async">{cap}</figure>')
         grid = (f'<div class="gallery-grid">\n' + "\n".join(figs) + "\n</div>") if figs else \
             '<p class="muted center">Photos coming soon.</p>'
-        body = f"""{self.page_head("Gallery", "Meetings, events, and adventures.")}
+        mtgs = self.terms.get("meetings", "meetings")
+        body = f"""{self.page_head("Gallery", f"{mtgs.capitalize()}, events, and adventures.")}
 
 <section class="section">
   <div class="wrap">
@@ -575,7 +577,7 @@ class Site:
     <p class="muted center">Have photos to share? Send them to <a href="mailto:{esc(c["contact"]["email"])}">{esc(c["contact"]["email"])}</a>. We only post photos of kids with a parent's written permission.</p>
   </div>
 </section>"""
-        return "Gallery", f"Photos from {self.name} meetings and events.", body, None
+        return "Gallery", f"Photos from {self.name} {mtgs} and events.", body, None
 
     def page_resources(self):
         c = self.cfg
@@ -615,7 +617,7 @@ class Site:
     </div>
   </div>
 </section>"""
-        return "FAQ", f"{self.name} FAQ: who can join, meetings, cost, and more.", body, ld
+        return "FAQ", f"{self.name} FAQ: who can join, {self.terms.get('meetings', 'meetings')}, cost, and more.", body, ld
 
     def page_contact(self):
         c = self.cfg
@@ -623,7 +625,8 @@ class Site:
         phone_html = f'<p>Phone: <a href="tel:{esc(re.sub(r"[^0-9+]", "", phone))}">{esc(phone)}</a></p>' if phone else ""
         socials = "".join(f"<li>{ext_link(s['url'], s['name'])}</li>" for s in c["contact"].get("social", []) if s.get("url"))
         social_html = f'<ul class="inline-list">{socials}</ul>' if socials else ""
-        body = f"""{self.page_head("Contact Us", "Questions about joining, meetings, or volunteering? We'd love to hear from you.")}
+        mtgs = self.terms.get("meetings", "meetings")
+        body = f"""{self.page_head("Contact Us", f"Questions about joining, {mtgs}, or volunteering? We'd love to hear from you.")}
 
 <section class="section">
   <div class="wrap narrow">
@@ -631,13 +634,13 @@ class Site:
       <h2>Get in Touch</h2>
       <p class="big-email"><a href="mailto:{esc(c["contact"]["email"])}">{esc(c["contact"]["email"])}</a></p>
       {phone_html}
-      <p><strong>Meetings:</strong> {esc(c["meetings"]["summary"])}<br>{esc(c["meetings"]["location"])}</p>
+      <p><strong>{esc(mtgs.capitalize())}:</strong> {esc(c["meetings"]["summary"])}<br>{esc(c["meetings"]["location"])}</p>
       <p>Just show up, or email first and we'll watch for you.</p>
       {social_html}
     </div>
   </div>
 </section>"""
-        return "Contact", f"Contact {self.name}: email, meeting time, and place.", body, None
+        return "Contact", f"Contact {self.name}: email, {self.terms.get('meeting', 'meeting')} time, and place.", body, None
 
     def page_privacy(self):
         c = self.cfg
@@ -759,7 +762,9 @@ def main():
     global OUT
     OUT = (ROOT / args.out).resolve()
     cfg = load_config((ROOT / args.config).resolve())
-    base_url = (args.base_url or cfg["site"].get("url") or "").strip()
+    # Vercel always sets VERCEL_PROJECT_PRODUCTION_URL (host name only), so no setup is needed there.
+    vercel_host = os.environ.get("VERCEL_PROJECT_PRODUCTION_URL", "").strip()
+    base_url = (args.base_url or cfg["site"].get("url") or (vercel_host and f"https://{vercel_host}/") or "").strip()
     if base_url and not base_url.endswith("/"):
         base_url += "/"
     if base_url.startswith("http://"):

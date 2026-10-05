@@ -19,6 +19,7 @@ EXAMPLES = [                               # (folder name, settings file)
     ("demo-kids-club", "site.jsonc"),
     ("demo-scouts-bsa", "examples/demo-scouts-bsa.jsonc"),
     ("demo-girl-scouts", "examples/demo-girl-scouts.jsonc"),
+    ("demo-soccer", "examples/demo-soccer.jsonc"),
 ]
 
 base_url = os.environ.get("SITE_URL", "").strip()
