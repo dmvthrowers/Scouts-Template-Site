@@ -22,6 +22,8 @@ EXAMPLES = [                               # (folder name, settings file)
 ]
 
 base_url = os.environ.get("SITE_URL", "").strip()
+if base_url.startswith("http://"):          # GitHub Pages reports http:// until HTTPS is enforced
+    base_url = "https://" + base_url[len("http://"):]
 if base_url and not base_url.endswith("/"):
     base_url += "/"
 

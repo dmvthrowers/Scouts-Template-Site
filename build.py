@@ -762,6 +762,10 @@ def main():
     base_url = (args.base_url or cfg["site"].get("url") or "").strip()
     if base_url and not base_url.endswith("/"):
         base_url += "/"
+    if base_url.startswith("http://"):
+        # GitHub Pages reports http:// until "Enforce HTTPS" is on; the site is still served over HTTPS.
+        base_url = "https://" + base_url[len("http://"):]
+        warnings.append(f"Using {base_url} (https). On GitHub Pages, tick Settings > Pages > Enforce HTTPS.")
     if base_url and urlparse(base_url).scheme != "https":
         warnings.append(f"Site URL {base_url} should start with https://")
     site = Site(cfg, base_url)
