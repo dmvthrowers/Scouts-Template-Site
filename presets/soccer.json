@@ -1,0 +1,171 @@
+{
+  "preset_name": "Youth soccer club",
+  "terms": {
+    "unit": "Club",
+    "unit_lower": "club",
+    "groups": "Teams",
+    "group": "Team",
+    "member": "player",
+    "members": "players",
+    "leader": "coach",
+    "leaders": "Coaches & Volunteers",
+    "family": "family",
+    "meeting": "practice",
+    "meetings": "practices",
+    "meetings_title": "Practices & Games",
+    "visit": "Try a Practice"
+  },
+  "program": {
+    "org_name": "",
+    "org_url": "",
+    "ages": "ages 4 to 14",
+    "welcome": "Boys and girls of every skill level are welcome",
+    "about_title": "What We Do",
+    "about": [
+      "We're a volunteer-run youth soccer club. Players learn to dribble, pass, and shoot, and they learn to play as a team.",
+      "Younger players play small-sided games so everyone touches the ball a lot. Every player gets real playing time."
+    ],
+    "pillars": [
+      {
+        "title": "Touch the Ball",
+        "text": "Small-sided games mean more touches and more fun."
+      },
+      {
+        "title": "Everyone Plays",
+        "text": "Fair playing time for every player, every game."
+      },
+      {
+        "title": "Respect the Game",
+        "text": "Respect for teammates, opponents, coaches, and referees."
+      },
+      {
+        "title": "Have Fun",
+        "text": "Kids who love the game keep playing it."
+      }
+    ]
+  },
+  "groups": [
+    {
+      "name": "U6",
+      "ages": "Ages 4–5",
+      "text": "3v3 or 4v4 games with no goalkeepers. Lots of touches and lots of fun."
+    },
+    {
+      "name": "U8",
+      "ages": "Ages 6–7",
+      "text": "4v4 games and the first simple rules: throw-ins, kickoffs, and teamwork."
+    },
+    {
+      "name": "U10",
+      "ages": "Ages 8–9",
+      "text": "7v7 games with goalkeepers, passing, and positions."
+    },
+    {
+      "name": "U12",
+      "ages": "Ages 10–11",
+      "text": "9v9 games, offside, and more tactics."
+    },
+    {
+      "name": "U14",
+      "ages": "Ages 12–13",
+      "text": "11v11 on a full-size field."
+    }
+  ],
+  "groups_intro": "Teams are grouped by birth year (\"U8\" means under 8), so players compete with kids their own age.",
+  "join_steps": [
+    {
+      "title": "Ask Us",
+      "text": "Email us with your child's age and any questions. We'll tell you which team fits."
+    },
+    {
+      "title": "Try a Practice",
+      "text": "Come watch or join a practice. No commitment, no cost."
+    },
+    {
+      "title": "Register",
+      "text": "Fill out the registration, medical, and permission forms before the season starts, and you're on the team."
+    }
+  ],
+  "join_link": {
+    "label": "",
+    "url": ""
+  },
+  "uniform": "We provide a jersey. Players need shin guards (required at every practice and game), soccer socks to cover them, cleats or athletic shoes, a size-appropriate ball, and a full water bottle.",
+  "safety": {
+    "title": "Player Safety",
+    "points": [
+      "Every coach and volunteer completes abuse-prevention training and a background check before working with players.",
+      "Two adults are present at every practice and game. No adult is ever alone with a player who isn't their own child.",
+      "Coaches learn the signs of a concussion. Any player with a suspected head injury sits out until a health care provider clears them. Heading the ball isn't part of practice or games for our youngest players.",
+      "We post photos of players only with written permission from a parent or guardian, and never with a player's full name."
+    ],
+    "training_name": "SafeSport training",
+    "training_url": "https://uscenterforsafesport.org/training-and-education/"
+  },
+  "faq": [
+    {
+      "q": "Who can play?",
+      "a": "Kids {ages}. {welcome}."
+    },
+    {
+      "q": "Does my child need experience?",
+      "a": "No. We teach the basics, and every player gets playing time."
+    },
+    {
+      "q": "When and where do you practice and play?",
+      "a": "{meetings}. Location: {location}."
+    },
+    {
+      "q": "How much does it cost?",
+      "a": "{cost}"
+    },
+    {
+      "q": "What gear do we need?",
+      "a": "Shin guards, socks that cover them, cleats or athletic shoes, a ball (size 3 for U8 and under, size 4 through U12, size 5 after that), and a water bottle."
+    },
+    {
+      "q": "Do parents need to volunteer?",
+      "a": "Every team needs a few helpers: coaches, team parents, snack and field volunteers. No experience needed, and we'll train you."
+    },
+    {
+      "q": "What happens when the weather is bad?",
+      "a": "Safety comes first. We stop for lightning and extreme heat, and we email families as soon as a practice or game is canceled."
+    },
+    {
+      "q": "Can we try it before signing up?",
+      "a": "Yes! Email {email} and we'll invite you to a practice."
+    }
+  ],
+  "resources": [
+    {
+      "title": "U.S. Soccer",
+      "text": "Player development, coaching courses, and safety guidance.",
+      "url": "https://www.ussoccer.com/",
+      "label": "ussoccer.com"
+    },
+    {
+      "title": "Laws of the Game (IFAB)",
+      "text": "The official rules of soccer.",
+      "url": "https://www.theifab.com/",
+      "label": "theifab.com"
+    },
+    {
+      "title": "U.S. Center for SafeSport",
+      "text": "Free abuse-prevention training and reporting for youth sports.",
+      "url": "https://uscenterforsafesport.org/",
+      "label": "uscenterforsafesport.org"
+    },
+    {
+      "title": "Project Play (Aspen Institute)",
+      "text": "Research and tips for parents on keeping youth sports fun and healthy.",
+      "url": "https://projectplay.org/",
+      "label": "projectplay.org"
+    }
+  ],
+  "theme": {
+    "primary": "#166534",
+    "accent": "#facc15",
+    "background": "#f7fdf8",
+    "ink": "#14281b"
+  }
+}

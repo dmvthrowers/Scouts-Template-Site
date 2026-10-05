@@ -1,0 +1,155 @@
+{
+  "preset_name": "Youth football club",
+  "terms": {
+    "unit": "Club",
+    "unit_lower": "club",
+    "groups": "Teams",
+    "group": "Team",
+    "member": "player",
+    "members": "players",
+    "leader": "coach",
+    "leaders": "Coaches & Volunteers",
+    "family": "family",
+    "meeting": "practice",
+    "meetings": "practices",
+    "meetings_title": "Practices & Games",
+    "visit": "Try a Practice"
+  },
+  "program": {
+    "org_name": "",
+    "org_url": "",
+    "ages": "ages 5 to 14",
+    "welcome": "Players of every skill level are welcome",
+    "about_title": "What We Do",
+    "about": [
+      "We're a volunteer-run youth football club. Players learn to run, catch, block, and play as a team, starting with flag football.",
+      "Coaches teach safe technique from day one. We care about effort, teamwork, and sportsmanship more than the scoreboard."
+    ],
+    "pillars": [
+      {
+        "title": "Safe Technique",
+        "text": "Proper form for tackling, blocking, and falling, taught from day one."
+      },
+      {
+        "title": "Everyone Plays",
+        "text": "Every player gets real snaps, every game."
+      },
+      {
+        "title": "Team First",
+        "text": "Eleven players, one goal: work together."
+      },
+      {
+        "title": "Have Fun",
+        "text": "Friday-night energy, at every age."
+      }
+    ]
+  },
+  "groups": [
+    {
+      "name": "Flag",
+      "ages": "Ages 5–8",
+      "text": "No-contact flag football: running, catching, and the basic rules."
+    },
+    {
+      "name": "Juniors",
+      "ages": "Ages 9–11",
+      "text": "Flag or limited-contact play with proper technique and fitted equipment."
+    },
+    {
+      "name": "Seniors",
+      "ages": "Ages 12–14",
+      "text": "Full teams, positions, and game strategy."
+    }
+  ],
+  "groups_intro": "Players are grouped by age and weight guidelines so every game is fair and safe. Ask us which divisions are flag and which are tackle this season.",
+  "join_steps": [
+    {
+      "title": "Ask Us",
+      "text": "Email us with your child's age and any questions. We'll tell you which team fits."
+    },
+    {
+      "title": "Try a Practice",
+      "text": "Come watch or join a practice. No commitment, no cost."
+    },
+    {
+      "title": "Register",
+      "text": "Fill out the registration, medical, and permission forms before the season starts, and you're on the team."
+    }
+  ],
+  "join_link": {
+    "label": "",
+    "url": ""
+  },
+  "uniform": "Flag players need athletic shoes or rubber cleats, a mouth guard, and a water bottle; we provide jerseys and flags. Tackle players are fitted for a helmet and pads by the club before the first practice.",
+  "safety": {
+    "title": "Player Safety",
+    "points": [
+      "Every coach and volunteer completes abuse-prevention training and a background check before working with players.",
+      "Two adults are present at every practice and game. No adult is ever alone with a player who isn't their own child.",
+      "Coaches learn the signs of a concussion. Any player with a suspected head injury sits out until a health care provider clears them. Contact in practice is limited, and helmets and pads are fitted and checked by trained coaches.",
+      "We post photos of players only with written permission from a parent or guardian, and never with a player's full name."
+    ],
+    "training_name": "SafeSport training",
+    "training_url": "https://uscenterforsafesport.org/training-and-education/"
+  },
+  "faq": [
+    {
+      "q": "Who can play?",
+      "a": "Kids {ages}. {welcome}."
+    },
+    {
+      "q": "Does my child need experience?",
+      "a": "No. We teach the basics, and every player gets playing time."
+    },
+    {
+      "q": "When and where do you practice and play?",
+      "a": "{meetings}. Location: {location}."
+    },
+    {
+      "q": "How much does it cost?",
+      "a": "{cost}"
+    },
+    {
+      "q": "What gear do we need?",
+      "a": "Athletic shoes or rubber cleats, a mouth guard, and a water bottle. For tackle divisions, the club fits each player with a helmet and pads; you may need football pants and a girdle."
+    },
+    {
+      "q": "Do parents need to volunteer?",
+      "a": "Every team needs a few helpers: coaches, team parents, snack and field volunteers. No experience needed, and we'll train you."
+    },
+    {
+      "q": "What happens when the weather is bad?",
+      "a": "Safety comes first. We stop for lightning and extreme heat, and we email families as soon as a practice or game is canceled."
+    },
+    {
+      "q": "Can we try it before signing up?",
+      "a": "Yes! Email {email} and we'll invite you to a practice."
+    }
+  ],
+  "resources": [
+    {
+      "title": "USA Football",
+      "text": "Coaching courses, youth rules, and safe tackling programs.",
+      "url": "https://www.usafootball.com/",
+      "label": "usafootball.com"
+    },
+    {
+      "title": "U.S. Center for SafeSport",
+      "text": "Free abuse-prevention training and reporting for youth sports.",
+      "url": "https://uscenterforsafesport.org/",
+      "label": "uscenterforsafesport.org"
+    },
+    {
+      "title": "Project Play (Aspen Institute)",
+      "text": "Research and tips for parents on keeping youth sports fun and healthy.",
+      "url": "https://projectplay.org/",
+      "label": "projectplay.org"
+    }
+  ],
+  "theme": {
+    "primary": "#7f1d1d",
+    "accent": "#fbbf24",
+    "background": "#fffbf5",
+    "ink": "#1c1917"
+  }
+}

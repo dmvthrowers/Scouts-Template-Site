@@ -1,6 +1,6 @@
 # Instructions for AI coding agents
 
-You're helping someone launch a website for a Scout unit, Girl Scout troop, or kids club from this
+You're helping someone launch a website for a Scout unit, Girl Scout troop, youth sports club, or kids club from this
 template. The human-facing guide is [README.md](README.md). Read it, then follow this.
 
 ## Goal
@@ -8,7 +8,8 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
 
 ## Steps
 1. **Collect facts from the user**:
-   - preset (`kids-club`, `cub-scouts`, `scouts-bsa`, `girl-scouts`)
+   - preset (`kids-club`, `cub-scouts`, `scouts-bsa`, `girl-scouts`, `sports-club`, `soccer`,
+     `baseball`, `football`, `basketball`)
    - group name and number
    - town and region
    - meeting days, time, and place
@@ -24,7 +25,11 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
    wording by adding the same key to `site.jsonc`, not by editing the preset.
 3. **Build and check locally:** `python3 build.py && python3 scripts/check_site.py`. Fix every
    WARNING the build prints (contrast, missing photos, bad dates) and every check failure.
-4. **Deploy (GitHub Pages):** the human must:
+4. **Deploy.** GitHub Pages is the default. If the user prefers Cloudflare Pages or Vercel, follow
+   README.md's "Other ways to deploy" instead: the human connects the repository in the host's
+   dashboard; on Cloudflare they set `SITE_URL`, and on Vercel `vercel.json` and
+   `VERCEL_PROJECT_PRODUCTION_URL` handle everything. Suggest disabling the GitHub Pages workflow there.
+   For **GitHub Pages**, the human must:
    - create the repository from the template ("Use this template")
    - set **Settings → Pages → Source: GitHub Actions**
 
@@ -40,6 +45,10 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
    Google Calendar public, adding a custom domain, turning on two-factor login.
 
 ## Rules
+- **Sports presets:** youth leagues have their own rules for age groups, equipment, pitch counts,
+  contact, and safety training. Ask the user which apply and change the preset text to match. Don't
+  name a league or governing body (Little League, AYSO, Pop Warner, and so on) as the club's
+  organization unless the user confirms the club is a member.
 - **Kids' privacy:**
   - No full names of children anywhere.
   - Photos only with the user's confirmation of written parent/guardian permission.

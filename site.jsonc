@@ -11,6 +11,11 @@
   //   "cub-scouts"  - Cub Scout pack (Scouting America)
   //   "scouts-bsa"  - Scouts BSA troop (Scouting America)
   //   "girl-scouts" - Girl Scout troop (Girl Scouts of the USA)
+  //   "sports-club" - any youth sports club (sports not listed below)
+  //   "soccer"      - youth soccer club
+  //   "baseball"    - youth baseball or softball league
+  //   "football"    - youth flag or tackle football club
+  //   "basketball"  - youth basketball club
   // Anything you set below overrides the preset.
   "preset": "kids-club",
 

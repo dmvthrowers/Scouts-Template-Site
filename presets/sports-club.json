@@ -1,0 +1,149 @@
+{
+  "preset_name": "Youth sports club",
+  "terms": {
+    "unit": "Club",
+    "unit_lower": "club",
+    "groups": "Teams",
+    "group": "Team",
+    "member": "player",
+    "members": "players",
+    "leader": "coach",
+    "leaders": "Coaches & Volunteers",
+    "family": "family",
+    "meeting": "practice",
+    "meetings": "practices",
+    "meetings_title": "Practices & Games",
+    "visit": "Try a Practice"
+  },
+  "program": {
+    "org_name": "",
+    "org_url": "",
+    "ages": "ages 5 to 14",
+    "welcome": "All skill levels welcome",
+    "about_title": "What We Do",
+    "about": [
+      "We're a youth sports club run by volunteers. Kids learn the game, get active, and build friendships, whether it's their first season or their fifth.",
+      "Every player gets coaching and real playing time. We care more about effort, teamwork, and good sportsmanship than the scoreboard."
+    ],
+    "pillars": [
+      {
+        "title": "Learn the Game",
+        "text": "Coaches teach skills step by step, at every age and level."
+      },
+      {
+        "title": "Everyone Plays",
+        "text": "Fair playing time for every player, every game."
+      },
+      {
+        "title": "Be a Good Sport",
+        "text": "Respect for teammates, opponents, coaches, and officials."
+      },
+      {
+        "title": "Have Fun",
+        "text": "Kids who enjoy the game keep playing it."
+      }
+    ]
+  },
+  "groups": [
+    {
+      "name": "Little Kickers",
+      "ages": "Ages 5–6",
+      "text": "Short, playful practices that build basic skills and confidence."
+    },
+    {
+      "name": "Juniors",
+      "ages": "Ages 7–9",
+      "text": "Small-sided games, team play, and the core rules of the game."
+    },
+    {
+      "name": "Seniors",
+      "ages": "Ages 10–14",
+      "text": "Full games, positions, and more chances to compete and lead."
+    }
+  ],
+  "groups_intro": "Players are placed on teams by age so every game is fair and fun.",
+  "join_steps": [
+    {
+      "title": "Ask Us",
+      "text": "Email us with your child's age and any questions. We'll tell you which team fits."
+    },
+    {
+      "title": "Try a Practice",
+      "text": "Come watch or join a practice. No commitment, no cost."
+    },
+    {
+      "title": "Register",
+      "text": "Fill out the registration, medical, and permission forms before the season starts, and you're on the team."
+    }
+  ],
+  "join_link": {
+    "label": "",
+    "url": ""
+  },
+  "uniform": "We provide a team shirt. Bring athletic shoes, a full water bottle, and any sport-specific safety gear your coach lists.",
+  "safety": {
+    "title": "Player Safety",
+    "points": [
+      "Every coach and volunteer completes abuse-prevention training and a background check before working with players.",
+      "Two adults are present at every practice and game. No adult is ever alone with a player who isn't their own child.",
+      "Coaches learn the signs of a concussion. Any player with a suspected head injury sits out until a health care provider clears them.",
+      "We post photos of players only with written permission from a parent or guardian, and never with a player's full name."
+    ],
+    "training_name": "SafeSport training",
+    "training_url": "https://uscenterforsafesport.org/training-and-education/"
+  },
+  "faq": [
+    {
+      "q": "Who can play?",
+      "a": "Kids {ages}. {welcome}."
+    },
+    {
+      "q": "Does my child need experience?",
+      "a": "No. We teach the basics, and every player gets playing time."
+    },
+    {
+      "q": "When and where do you practice and play?",
+      "a": "{meetings}. Location: {location}."
+    },
+    {
+      "q": "How much does it cost?",
+      "a": "{cost}"
+    },
+    {
+      "q": "What gear do we need?",
+      "a": "Athletic shoes, a water bottle, and the safety gear for your sport. Ask us before you buy anything; we often have used gear to share."
+    },
+    {
+      "q": "Do parents need to volunteer?",
+      "a": "Every team needs a few helpers: coaches, team parents, snack and field volunteers. No experience needed, and we'll train you."
+    },
+    {
+      "q": "What happens when the weather is bad?",
+      "a": "Safety comes first. We stop for lightning and extreme heat, and we email families as soon as a practice or game is canceled."
+    },
+    {
+      "q": "Can we try it before signing up?",
+      "a": "Yes! Email {email} and we'll invite you to a practice."
+    }
+  ],
+  "resources": [
+    {
+      "title": "U.S. Center for SafeSport",
+      "text": "Free abuse-prevention training and reporting for youth sports.",
+      "url": "https://uscenterforsafesport.org/",
+      "label": "uscenterforsafesport.org"
+    },
+    {
+      "title": "Project Play (Aspen Institute)",
+      "text": "Research and tips for parents on keeping youth sports fun and healthy.",
+      "url": "https://projectplay.org/",
+      "label": "projectplay.org"
+    }
+  ],
+  "theme": {
+    "primary": "#1e3a8a",
+    "accent": "#f97316",
+    "background": "#f8fafc",
+    "ink": "#0f172a"
+  }
+}

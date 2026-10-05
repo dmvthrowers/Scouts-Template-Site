@@ -1,0 +1,171 @@
+{
+  "preset_name": "Youth baseball & softball league",
+  "terms": {
+    "unit": "League",
+    "unit_lower": "league",
+    "groups": "Divisions",
+    "group": "Division",
+    "member": "player",
+    "members": "players",
+    "leader": "coach",
+    "leaders": "Coaches & Volunteers",
+    "family": "family",
+    "meeting": "practice",
+    "meetings": "practices",
+    "meetings_title": "Practices & Games",
+    "visit": "Try a Practice"
+  },
+  "program": {
+    "org_name": "",
+    "org_url": "",
+    "ages": "ages 4 to 14",
+    "welcome": "Players of every skill level are welcome",
+    "about_title": "What We Do",
+    "about": [
+      "We're a volunteer-run youth baseball and softball league. Players learn to hit, throw, catch, and run the bases, and they learn to be good teammates.",
+      "Divisions move from tee-ball to kid pitch as players grow. Everyone bats, everyone plays the field, and everyone gets coaching."
+    ],
+    "pillars": [
+      {
+        "title": "Learn the Basics",
+        "text": "Hitting, fielding, throwing, and base running at every level."
+      },
+      {
+        "title": "Everyone Plays",
+        "text": "Every player bats and plays the field, every game."
+      },
+      {
+        "title": "Protect Young Arms",
+        "text": "We follow pitch-count and rest rules for every pitcher."
+      },
+      {
+        "title": "Have Fun",
+        "text": "Summer evenings, team snacks, and lifelong friends."
+      }
+    ]
+  },
+  "groups": [
+    {
+      "name": "Tee-Ball",
+      "ages": "Ages 4–6",
+      "text": "Hitting off a tee, learning the bases, and having fun."
+    },
+    {
+      "name": "Coach Pitch",
+      "ages": "Ages 7–8",
+      "text": "Coaches pitch so players learn to hit moving pitches."
+    },
+    {
+      "name": "Minors",
+      "ages": "Ages 9–10",
+      "text": "Kid pitch begins, with pitch counts and rest days."
+    },
+    {
+      "name": "Majors",
+      "ages": "Ages 11–12",
+      "text": "Full games, more strategy, and all-star chances."
+    },
+    {
+      "name": "Juniors",
+      "ages": "Ages 13–14",
+      "text": "Bigger field, leading off, and advanced play."
+    }
+  ],
+  "groups_intro": "Players are placed in divisions by age. Softball divisions follow the same steps; ask us what's offered this season.",
+  "join_steps": [
+    {
+      "title": "Ask Us",
+      "text": "Email us with your child's age and any questions. We'll tell you which team fits."
+    },
+    {
+      "title": "Try a Practice",
+      "text": "Come watch or join a practice. No commitment, no cost."
+    },
+    {
+      "title": "Register",
+      "text": "Fill out the registration, medical, and permission forms before the season starts, and you're on the team."
+    }
+  ],
+  "join_link": {
+    "label": "",
+    "url": ""
+  },
+  "uniform": "We provide a jersey and cap. Players need a glove, baseball pants, athletic shoes or rubber cleats (no metal spikes for younger players), and a batting helmet if they have one (we have spares). Catchers use league gear.",
+  "safety": {
+    "title": "Player Safety",
+    "points": [
+      "Every coach and volunteer completes abuse-prevention training and a background check before working with players.",
+      "Two adults are present at every practice and game. No adult is ever alone with a player who isn't their own child.",
+      "Every pitcher follows pitch-count limits and required rest days. Batters, base runners, and catchers always wear helmets.",
+      "We post photos of players only with written permission from a parent or guardian, and never with a player's full name."
+    ],
+    "training_name": "SafeSport training",
+    "training_url": "https://uscenterforsafesport.org/training-and-education/"
+  },
+  "faq": [
+    {
+      "q": "Who can play?",
+      "a": "Kids {ages}. {welcome}."
+    },
+    {
+      "q": "Does my child need experience?",
+      "a": "No. We teach the basics, and every player gets playing time."
+    },
+    {
+      "q": "When and where do you practice and play?",
+      "a": "{meetings}. Location: {location}."
+    },
+    {
+      "q": "How much does it cost?",
+      "a": "{cost}"
+    },
+    {
+      "q": "What gear do we need?",
+      "a": "A glove that fits, baseball pants, athletic shoes or rubber cleats, and a water bottle. Bats and helmets are shared; ask before buying a bat, since leagues have bat rules."
+    },
+    {
+      "q": "Do parents need to volunteer?",
+      "a": "Every team needs a few helpers: coaches, team parents, snack and field volunteers. No experience needed, and we'll train you."
+    },
+    {
+      "q": "What happens when the weather is bad?",
+      "a": "Safety comes first. We stop for lightning and extreme heat, and we email families as soon as a practice or game is canceled."
+    },
+    {
+      "q": "Can we try it before signing up?",
+      "a": "Yes! Email {email} and we'll invite you to a practice."
+    }
+  ],
+  "resources": [
+    {
+      "title": "USA Baseball",
+      "text": "Youth baseball rules, coaching, and player development.",
+      "url": "https://www.usabaseball.com/",
+      "label": "usabaseball.com"
+    },
+    {
+      "title": "Pitch Smart",
+      "text": "Pitch-count and rest guidelines to protect young arms.",
+      "url": "https://www.mlb.com/pitch-smart",
+      "label": "mlb.com/pitch-smart"
+    },
+    {
+      "title": "U.S. Center for SafeSport",
+      "text": "Free abuse-prevention training and reporting for youth sports.",
+      "url": "https://uscenterforsafesport.org/",
+      "label": "uscenterforsafesport.org"
+    },
+    {
+      "title": "Project Play (Aspen Institute)",
+      "text": "Research and tips for parents on keeping youth sports fun and healthy.",
+      "url": "https://projectplay.org/",
+      "label": "projectplay.org"
+    }
+  ],
+  "theme": {
+    "primary": "#1e3a5f",
+    "accent": "#dc2626",
+    "background": "#fffdf7",
+    "ink": "#1f2937"
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "preset_name": "Youth basketball club",
+  "terms": {
+    "unit": "Club",
+    "unit_lower": "club",
+    "groups": "Teams",
+    "group": "Team",
+    "member": "player",
+    "members": "players",
+    "leader": "coach",
+    "leaders": "Coaches & Volunteers",
+    "family": "family",
+    "meeting": "practice",
+    "meetings": "practices",
+    "meetings_title": "Practices & Games",
+    "visit": "Try a Practice"
+  },
+  "program": {
+    "org_name": "",
+    "org_url": "",
+    "ages": "ages 5 to 14",
+    "welcome": "Boys and girls of every skill level are welcome",
+    "about_title": "What We Do",
+    "about": [
+      "We're a volunteer-run youth basketball club. Players learn to dribble, pass, shoot, and defend, and they learn to play as a team.",
+      "Younger players use smaller balls and lower hoops where we can, so every kid can score. Every player gets real playing time."
+    ],
+    "pillars": [
+      {
+        "title": "Skills First",
+        "text": "Ball handling, passing, and shooting at every age."
+      },
+      {
+        "title": "Everyone Plays",
+        "text": "Fair playing time for every player, every game."
+      },
+      {
+        "title": "Play Together",
+        "text": "Share the ball, help on defense, cheer for your team."
+      },
+      {
+        "title": "Have Fun",
+        "text": "Winter weekends, big shots, and good friends."
+      }
+    ]
+  },
+  "groups": [
+    {
+      "name": "Rookies",
+      "ages": "Ages 5–7",
+      "text": "Fun drills and simple games, often on a lower hoop with a smaller ball."
+    },
+    {
+      "name": "Juniors",
+      "ages": "Ages 8–10",
+      "text": "Team play, basic rules, and man-to-man defense."
+    },
+    {
+      "name": "Seniors",
+      "ages": "Ages 11–14",
+      "text": "Full games, plays, and more competition."
+    }
+  ],
+  "groups_intro": "Teams are formed by age and grade so every game is fair and fun.",
+  "join_steps": [
+    {
+      "title": "Ask Us",
+      "text": "Email us with your child's age and any questions. We'll tell you which team fits."
+    },
+    {
+      "title": "Try a Practice",
+      "text": "Come watch or join a practice. No commitment, no cost."
+    },
+    {
+      "title": "Register",
+      "text": "Fill out the registration, medical, and permission forms before the season starts, and you're on the team."
+    }
+  ],
+  "join_link": {
+    "label": "",
+    "url": ""
+  },
+  "uniform": "We provide a reversible jersey. Players need clean basketball or court shoes (no black soles on gym floors), athletic shorts, and a water bottle.",
+  "safety": {
+    "title": "Player Safety",
+    "points": [
+      "Every coach and volunteer completes abuse-prevention training and a background check before working with players.",
+      "Two adults are present at every practice and game. No adult is ever alone with a player who isn't their own child.",
+      "Coaches learn the signs of a concussion. Any player with a suspected head injury sits out until a health care provider clears them.",
+      "We post photos of players only with written permission from a parent or guardian, and never with a player's full name."
+    ],
+    "training_name": "SafeSport training",
+    "training_url": "https://uscenterforsafesport.org/training-and-education/"
+  },
+  "faq": [
+    {
+      "q": "Who can play?",
+      "a": "Kids {ages}. {welcome}."
+    },
+    {
+      "q": "Does my child need experience?",
+      "a": "No. We teach the basics, and every player gets playing time."
+    },
+    {
+      "q": "When and where do you practice and play?",
+      "a": "{meetings}. Location: {location}."
+    },
+    {
+      "q": "How much does it cost?",
+      "a": "{cost}"
+    },
+    {
+      "q": "What gear do we need?",
+      "a": "Clean court shoes, athletic shorts, and a water bottle. A ball at home helps (size 5 for ages 8 and under, size 6 for older girls and younger boys, size 7 for older boys)."
+    },
+    {
+      "q": "Do parents need to volunteer?",
+      "a": "Every team needs a few helpers: coaches, team parents, snack and field volunteers. No experience needed, and we'll train you."
+    },
+    {
+      "q": "Can we try it before signing up?",
+      "a": "Yes! Email {email} and we'll invite you to a practice."
+    }
+  ],
+  "resources": [
+    {
+      "title": "USA Basketball Youth",
+      "text": "Age-appropriate rules, coaching licenses, and player development.",
+      "url": "https://www.usab.com/youth",
+      "label": "usab.com/youth"
+    },
+    {
+      "title": "U.S. Center for SafeSport",
+      "text": "Free abuse-prevention training and reporting for youth sports.",
+      "url": "https://uscenterforsafesport.org/",
+      "label": "uscenterforsafesport.org"
+    },
+    {
+      "title": "Project Play (Aspen Institute)",
+      "text": "Research and tips for parents on keeping youth sports fun and healthy.",
+      "url": "https://projectplay.org/",
+      "label": "projectplay.org"
+    }
+  ],
+  "theme": {
+    "primary": "#9a3412",
+    "accent": "#1d4ed8",
+    "background": "#fffaf5",
+    "ink": "#1c1917"
+  }
+}

@@ -1,4 +1,4 @@
-// DEMO: a fictional Girl Scout troop built from the "girl-scouts" preset. Names and details are made up.
+// DEMO: a fictional youth soccer club built from the "soccer" preset. Names and details are made up.
 // =====================================================================
 //  YOUR SITE SETTINGS: this is the main file you edit.
 //  Lines starting with // are notes and are ignored.
@@ -18,7 +18,7 @@
   //   "football"    - youth flag or tackle football club
   //   "basketball"  - youth basketball club
   // Anything you set below overrides the preset.
-  "preset": "girl-scouts",
+  "preset": "soccer",
 
   "site": {
     // Your site's address. Leave "" on GitHub Pages: it's filled in automatically,
@@ -35,29 +35,29 @@
 
   "group": {
     // Full name, as you want it in the page title and header
-    "name": "Girl Scout Troop 7890 (Demo)",
+    "name": "Springfield Youth Soccer (Demo)",
     // Unit number if you have one ("1125" for Pack 1125). "" if none.
-    "number": "7890",
+    "number": "",
     // Short motto or tagline
-    "tagline": "Courage, Confidence, Character",
+    "tagline": "Every kid plays",
     "city": "Springfield",
     // State, province, or region
     "region": "VA",
     // Year started ("" to hide)
-    "founded": "2026",
+    "founded": "2019",
     // One or two sentences for the home page and search results
-    "description": "A multi-level Girl Scout troop where girls explore STEM, the outdoors, and leadership.",
+    "description": "A volunteer-run recreational soccer club for kids ages 4 to 14. Fall and spring seasons, every skill level welcome.",
     // Who you serve, e.g. which schools or neighborhoods ("" to hide)
     "serves": "Families in the Maple Street and Oak Hill neighborhoods."
   },
 
   "meetings": {
     // How often and when
-    "summary": "2nd and 4th Tuesdays, 6:30–7:30 PM",
+    "summary": "Practices one weeknight; games Saturday mornings",
     // Where. Keep it general (building name + town) for kids' privacy.
-    "location": "Springfield Community Center, Springfield VA",
+    "location": "Springfield Park fields, Springfield VA",
     // Season or months you meet ("" to hide)
-    "season": "September through May"
+    "season": "Fall (Sept–Nov) and Spring (Mar–May)"
   },
 
   "contact": {
@@ -71,9 +71,9 @@
 
   "cost": {
     // One line for the home page, e.g. "$60 per year" or "Free"
-    "summary": "Varies; ask us",
+    "summary": "$85 per season",
     // Longer explanation for the Join page and FAQ
-    "details": "National membership fees plus small unit dues. Financial help is available, and no youth is ever turned away for cost.",
+    "details": "$85 per season includes a jersey, insurance, and field fees. Scholarships are available, and no child is ever turned away for cost.",
     // Link to financial aid or scholarships ("" to hide)
     "aid_url": ""
   },
@@ -87,16 +87,17 @@
   // Adult leaders. Only list people who said yes to being on the site.
   // An entry with "open": true shows a "volunteer with us" card.
   "leaders": [
-    { "role": "Troop Leader", "name": "Alex Example" },
-    { "role": "Co-Leaders", "open": true }
+    { "role": "Club Director", "name": "Alex Example" },
+    { "role": "Volunteer Coaches", "open": true },
+    { "role": "Referee Coordinator", "open": true }
   ],
 
   // Upcoming events. Use "YYYY-MM-DD" dates; past events hide automatically.
   // Use "date": "" for "date to be announced".
   "events": [
-    { "date": "2026-11-07", "title": "Fall Hike", "details": "Meet at the trailhead at 9 AM." },
-    { "date": "2026-12-15", "title": "Holiday Service Project", "details": "Making cards for neighbors." },
-    { "date": "", "title": "Spring Campout", "details": "Date to be announced." }
+    { "date": "2026-11-07", "title": "Fall Jamboree", "details": "Last games of the season, plus a team photo and snacks." },
+    { "date": "2027-01-15", "title": "Spring Registration Opens", "details": "Sign up online; early registration closes Feb 15." },
+    { "date": "", "title": "Free Coaching Clinic", "details": "For new volunteer coaches. Date to be announced." }
   ],
 
   // Google Calendar (optional). Paste the "embed" URL from Google Calendar settings:
