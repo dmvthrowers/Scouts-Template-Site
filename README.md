@@ -150,14 +150,35 @@ for an example.
 
 ## Custom domain (optional, about $10–20/year)
 
-1. Buy a domain from any registrar (Cloudflare, Namecheap, Porkbun, Google/Squarespace…).
-2. In your repository: **Settings → Pages → Custom domain**. Enter it and click **Save**.
-3. At your registrar, add the DNS records GitHub shows you:
+Your site works fine at its free GitHub address. A short domain like `troop123.org` is easier to
+put on flyers. You can add one any time; the free address keeps working until you switch.
+
+**Choosing and buying one**
+- Any registrar works (Porkbun, Cloudflare, Namecheap, Squarespace…). Buy only the domain: you
+  don't need their hosting, email, or website builder.
+- Compare the **renewal** price, not just the first year. Some endings (`.club`, `.site`, `.xyz`)
+  are cheap at first and cost more later. `.org` costs about the same every year.
+- Turn on the free WHOIS privacy so a leader's home address isn't public.
+- Don't put an organization's trademark in the name (for example "girlscouts" or "cubscouts")
+  without checking with your council first. `troop123.org` or `pack123dumfries.org` are safe.
+- Register it in a shared unit account or write down who owns it. Domains lapse when the one
+  leader who knew about it moves on.
+
+**Connecting it**
+1. In your repository: **Settings → Pages → Custom domain**. Enter it and click **Save**.
+   (Don't add a `CNAME` file; with the Actions deploy, this setting is all you need.)
+2. At your registrar, add the DNS records GitHub shows you:
    - for `troop123.org`: four `A` records pointing to 185.199.108.153, 185.199.109.153,
      185.199.110.153 and 185.199.111.153
    - for `www`: a `CNAME` to `YOUR-GITHUB-NAME.github.io`
-4. When the check turns green, tick **Enforce HTTPS**.
-5. Run **Actions → Build and deploy → Run workflow** so the site picks up its new address.
+3. When the check turns green (minutes to a few hours), tick **Enforce HTTPS**.
+4. Run **Actions → Build and deploy → Run workflow** so the site picks up its new address
+   (canonical links, social previews, and the sitemap). You don't need to edit `site.url`.
+
+> **Already have a domain on your GitHub account?** If your account's main site
+> (`YOUR-GITHUB-NAME.github.io`) uses a custom domain, this site appears under it, e.g.
+> `example.org/troop123/`. That works fine. Give this repository its own custom domain whenever
+> you want a separate address.
 
 ---
 
