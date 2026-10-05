@@ -260,3 +260,7 @@ showcase/, scripts/build_showcase.py  ← the template's own showcase page (safe
 ```
 
 Pull requests with improvements, new presets, or translations are welcome.
+
+**Sister templates** (same engine, same one-file setup):
+- [yoyoclub-template](https://github.com/dmvthrowers/yoyoclub-template): yo-yo, kendama, and skill toy clubs. Meetup dates update themselves. [Showcase](https://dmvthrowers.club/yoyoclub-template/).
+- [yoyo-contest-template](https://github.com/dmvthrowers/yoyo-contest-template): yo-yo and skill toy contests, with divisions, rules, sponsors, and results. [Showcase](https://dmvthrowers.club/yoyo-contest-template/).
