@@ -16,8 +16,9 @@
   "preset": "girl-scouts",
 
   "site": {
-    // Your site's address. Leave "" on GitHub Pages; it's filled in automatically.
-    // Set it if you use your own domain, e.g. "https://troop123.org/"
+    // Your site's address. Leave "" on GitHub Pages: it's filled in automatically,
+    // even with a custom domain (see README "Custom domain").
+    // Only set it when hosting elsewhere, e.g. "https://troop123.org/"
     "url": "",
     // Language code for the page (e.g. "en", "es", "fr")
     "language": "en",

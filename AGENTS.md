@@ -30,7 +30,13 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
 
    Then push to `main`. The workflow builds, checks, and deploys. Confirm the run is green and the
    page URL loads (HTTP 200, the group name in `<title>`).
-5. **Report** the live URL and anything the user still needs to do. Typical items: making the
+5. **Custom domain (optional):** offer it, and do it only if the user wants it. The human buys the domain
+   (renewal price, WHOIS privacy on, no organization trademarks in the name) and enters it in
+   **Settings → Pages → Custom domain**. You give them the exact DNS records from README.md's
+   "Custom domain" section, then re-run the workflow. Don't commit a `CNAME` file or set
+   `site.url`; on GitHub Pages the address comes from the Pages settings automatically. Verify the
+   new address returns 200 and its sitemap uses it.
+6. **Report** the live URL and anything the user still needs to do. Typical items: making the
    Google Calendar public, adding a custom domain, turning on two-factor login.
 
 ## Rules
