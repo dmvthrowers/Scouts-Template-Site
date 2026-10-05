@@ -24,7 +24,7 @@
     // Date style: "us" = Sat, Nov 7, 2026   "intl" = Sat 7 Nov 2026
     "date_format": "us",
     // Optional link in the footer to this site's source code. "" hides it.
-    "source_url": "https://github.com/dmvthrowers/scout-site-template"
+    "source_url": "https://github.com/dmvthrowers/Scouts-Template-Site"
   },
 
   "group": {

@@ -39,7 +39,7 @@ jobs:
         # The original template repo publishes a showcase page with example sites instead.
         # Your copy builds your own site.
         run: |
-          if [ "$GITHUB_REPOSITORY" = "dmvthrowers/scout-site-template" ]; then
+          if [ "${GITHUB_REPOSITORY,,}" = "dmvthrowers/scouts-template-site" ]; then
             python3 scripts/build_showcase.py
           else
             python3 build.py

@@ -10,7 +10,7 @@ monthly fees.
 - **Time:** about 15–30 minutes from "Use this template" to a live site.
 - **Skills:** you can edit a text file in your web browser. An AI coding agent can do the whole thing (see [AGENTS.md](AGENTS.md)).
 - **License:** [Unlicense](LICENSE), public domain. Copy, change, and share it however you like.
-- **See it first:** the [showcase and deploy guide](https://dmvthrowers.club/scout-site-template/) has live examples, including a real Cub Scout pack.
+- **See it first:** the [showcase and deploy guide](https://dmvthrowers.club/Scouts-Template-Site/) has live examples, including a real Cub Scout pack.
 
 **What you get:** 10 pages (Home, About, Join, Groups, Calendar, Gallery, Resources, FAQ, Contact,
 Privacy & Safety) plus a "page not found" page. Upcoming events hide themselves once they've passed.
