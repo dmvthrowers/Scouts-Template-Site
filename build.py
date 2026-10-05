@@ -589,6 +589,9 @@ class Site:
             org = c.get(key) or {}
             if org.get("name") and org.get("url"):
                 items.append({"title": title, "text": org["name"], "url": org["url"], "label": "Visit website"})
+        # A thank-you to DMV Throwers, the club that made this template. Delete these two lines to remove it.
+        items.append({"title": "Learn to Yo-Yo", "text": "A free how-to guide from DMV Throwers, the yo-yo club behind this template.",
+                      "url": "https://dmvthrowers.club/learn-yoyo.html", "label": "dmvthrowers.club"})
         cards = "".join(f'\n  <div class="card"><h3>{esc(i["title"])}</h3><p>{esc(i.get("text", ""))}</p>'
                         f'<p>{ext_link(i["url"], i.get("label") or i["url"])}</p></div>' for i in items if i.get("url"))
         if not cards:

@@ -102,6 +102,7 @@ stays as it was until the problem is fixed.
 | Social-share image | add `assets/og-card.png` (1200×630) | Otherwise one is generated in your colors. |
 | Photos | `assets/images/gallery/` + `site.jsonc` → `gallery` | See [Photos](#photos-and-kids-privacy). |
 | Extra links on Resources | `site.jsonc` → `links` | |
+| "Learn to Yo-Yo" card on Resources | `build.py` → `page_resources` | A small thank-you link to DMV Throwers, the club that made this template. Delete the two lines under the comment to remove it. |
 | Extra FAQ questions | `site.jsonc` → `faq_extra` | |
 | Group names, age levels, join steps, FAQ, safety text | `presets/<your preset>.json` | Or copy any section into `site.jsonc` to override it. |
 | Words like Club/Team, Leaders/Coaches, meetings/practices | `site.jsonc` → `terms` | e.g. `"terms": { "unit": "Team", "leaders": "Coaches", "meetings": "practices", "meeting": "practice", "visit": "Try a Practice" }`. See any sports preset for the full list. |
