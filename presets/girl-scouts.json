@@ -1,0 +1,71 @@
+{
+  "preset_name": "Girl Scouts troop (Girl Scouts of the USA)",
+  "terms": {
+    "unit": "Troop",
+    "unit_lower": "troop",
+    "groups": "Levels",
+    "group": "Level",
+    "member": "Girl Scout",
+    "members": "Girl Scouts",
+    "leader": "troop leader",
+    "family": "family"
+  },
+  "program": {
+    "org_name": "Girl Scouts of the USA",
+    "org_url": "https://www.girlscouts.org/",
+    "ages": "in kindergarten through 12th grade",
+    "welcome": "All girls are welcome",
+    "about_title": "What Is Girl Scouts?",
+    "about": [
+      "Girl Scouts helps girls in kindergarten through 12th grade build courage, confidence, and character. Girl Scouts explore STEM, the outdoors, entrepreneurship, and life skills, and earn badges along the way.",
+      "Troops are girl-led: members choose activities, plan trips, run the cookie program, and take action in their community, with support from trained volunteers."
+    ],
+    "pillars": [
+      { "title": "STEM", "text": "Coding, robotics, engineering, and science." },
+      { "title": "Outdoors", "text": "Camping, hiking, and adventures in nature." },
+      { "title": "Life Skills", "text": "Leadership, money smarts, and confidence." },
+      { "title": "Entrepreneurship", "text": "Business skills through the cookie program and more." }
+    ]
+  },
+  "groups": [
+    { "name": "Daisy", "ages": "Grades K–1", "text": "First adventures in friendship, nature, and helping others." },
+    { "name": "Brownie", "ages": "Grades 2–3", "text": "Exploring new skills, the outdoors, and the world around them." },
+    { "name": "Junior", "ages": "Grades 4–5", "text": "Bigger projects, first leadership roles, and the Bronze Award." },
+    { "name": "Cadette", "ages": "Grades 6–8", "text": "Taking on challenges, mentoring, and working toward the Silver Award." },
+    { "name": "Senior", "ages": "Grades 9–10", "text": "Leading projects, travel, and exploring the future." },
+    { "name": "Ambassador", "ages": "Grades 11–12", "text": "Making a lasting impact and earning the Gold Award." }
+  ],
+  "groups_intro": "Girl Scouts are grouped by grade level. Some troops include several levels.",
+  "join_steps": [
+    { "title": "Contact Us", "text": "Email us with your Girl Scout's name and grade. We'll answer any questions." },
+    { "title": "Visit a Meeting", "text": "Come meet the troop and see what we do." },
+    { "title": "Join Online", "text": "Register through Girl Scouts of the USA and ask to be placed in our troop." }
+  ],
+  "join_link": { "label": "Join Girl Scouts", "url": "https://www.girlscouts.org/join" },
+  "uniform": "Girl Scouts wear a vest or sash for their level to display badges and pins. Ask us what your Girl Scout needs.",
+  "safety": {
+    "title": "Keeping Girls Safe",
+    "points": [
+      "Every adult volunteer is screened and background-checked through our Girl Scout council.",
+      "At least two unrelated, approved adult volunteers are present at troop meetings and activities.",
+      "We follow Girl Scouts' Safety Activity Checkpoints, and post photos only with written permission from a parent or guardian, never with a girl's full name."
+    ],
+    "training_name": "Girl Scouts volunteer resources",
+    "training_url": "https://www.girlscouts.org/en/members/for-volunteers.html"
+  },
+  "faq": [
+    { "q": "Who can join?", "a": "Girls {ages}. {welcome}." },
+    { "q": "When and where do you meet?", "a": "{meetings}. Location: {location}." },
+    { "q": "Can we visit before we join?", "a": "Yes! Email {email} and we'll invite you to a meeting." },
+    { "q": "How much does it cost?", "a": "{cost}" },
+    { "q": "What are the Girl Scout levels?", "a": "Daisy (K–1), Brownie (2–3), Junior (4–5), Cadette (6–8), Senior (9–10), and Ambassador (11–12)." },
+    { "q": "Can parents volunteer?", "a": "Yes, and we'd love the help. Volunteers are screened and trained through our Girl Scout council." }
+  ],
+  "resources": [
+    { "title": "Girl Scouts of the USA", "text": "The official program: badges, awards, and family resources.", "url": "https://www.girlscouts.org/", "label": "girlscouts.org" },
+    { "title": "Join Girl Scouts", "text": "Register as a member or volunteer.", "url": "https://www.girlscouts.org/join", "label": "Join online" },
+    { "title": "For Volunteers", "text": "Training and resources for troop leaders and parents.", "url": "https://www.girlscouts.org/en/members/for-volunteers.html", "label": "Volunteer resources" },
+    { "title": "Girl Scout Shop", "text": "Uniforms, badges, and insignia.", "url": "https://www.girlscoutshop.com/", "label": "girlscoutshop.com" }
+  ],
+  "theme": { "primary": "#14532d", "accent": "#f2a900", "background": "#fbfdf9", "ink": "#1c2b22" }
+}

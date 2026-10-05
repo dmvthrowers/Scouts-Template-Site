@@ -1,0 +1,73 @@
+{
+  "preset_name": "Scouts BSA troop (Scouting America)",
+  "terms": {
+    "unit": "Troop",
+    "unit_lower": "troop",
+    "groups": "Patrols",
+    "group": "Patrol",
+    "member": "Scout",
+    "members": "Scouts",
+    "leader": "leader",
+    "family": "family"
+  },
+  "program": {
+    "org_name": "Scouting America",
+    "org_url": "https://www.scouting.org/programs/scouts-bsa/",
+    "ages": "ages 11 to 17 (or 10 after finishing 5th grade or earning the Arrow of Light)",
+    "welcome": "New Scouts are welcome all year",
+    "about_title": "What Is Scouts BSA?",
+    "about": [
+      "Scouts BSA is a Scout-led program for youth ages 11 to 17. Scouts plan their own activities, camp and hike, learn real skills, and earn merit badges in hundreds of subjects.",
+      "Scouts work in small teams called patrols and advance from Scout to Eagle. Along the way they learn leadership, citizenship, and the outdoors, guided by trained adult leaders."
+    ],
+    "pillars": [
+      { "title": "Scout-Led", "text": "Scouts plan and run the program, and adults coach." },
+      { "title": "Outdoors", "text": "Camping, hiking, and high adventure all year." },
+      { "title": "Advancement", "text": "From Scout to Eagle, with merit badges along the way." },
+      { "title": "Service", "text": "Service projects that make a real difference." }
+    ]
+  },
+  "groups": [
+    { "name": "Scout", "ages": "First rank", "text": "Learn the Scout Oath and Scout Law and the basics of troop life." },
+    { "name": "Tenderfoot", "ages": "Rank", "text": "First camping and outdoor skills, first aid, and fitness." },
+    { "name": "Second Class", "ages": "Rank", "text": "Navigation, cooking, and more time outdoors." },
+    { "name": "First Class", "ages": "Rank", "text": "Strong outdoor skills and readiness to help others." },
+    { "name": "Star & Life", "ages": "Ranks", "text": "Merit badges, service, and troop leadership positions." },
+    { "name": "Eagle Scout", "ages": "Highest rank", "text": "Earned by leading a service project and completing 21 merit badges." }
+  ],
+  "groups_intro": "Scouts work in patrols of about 6 to 8 and advance through the ranks at their own pace.",
+  "join_steps": [
+    { "title": "Contact Us", "text": "Email us with your Scout's name and age. We'll answer any questions." },
+    { "title": "Visit a Meeting", "text": "Come to a troop meeting and meet the patrols." },
+    { "title": "Apply Online", "text": "Find our troop on BeAScout and complete the youth application." }
+  ],
+  "join_link": { "label": "Find us on BeAScout", "url": "https://beascout.scouting.org" },
+  "uniform": "Scouts wear the Scouts BSA uniform for meetings and ceremonies and carry the Scouts BSA Handbook. Ask us about used uniforms.",
+  "safety": {
+    "title": "Youth Protection",
+    "points": [
+      "Every adult leader completes Scouting America's Safeguarding Youth training and a background check.",
+      "Two registered adults are present at every activity. No one-on-one contact between adults and youth.",
+      "We post photos of Scouts only with written permission from a parent or guardian, and never with a Scout's full name."
+    ],
+    "training_name": "Safeguarding Youth training",
+    "training_url": "https://www.scouting.org/training/youth-protection/"
+  },
+  "faq": [
+    { "q": "Who can join?", "a": "Youth {ages}. {welcome}." },
+    { "q": "When and where do you meet?", "a": "{meetings}. Location: {location}." },
+    { "q": "Can we visit before we join?", "a": "Yes! Come to any troop meeting. Email {email} first so we can watch for you." },
+    { "q": "How much does it cost?", "a": "{cost}" },
+    { "q": "What is a patrol?", "a": "A small team of Scouts who camp, cook, and work together, with an elected patrol leader." },
+    { "q": "Do parents need to be involved?", "a": "Scouts lead the troop, and adults support them. We always need adult volunteers; training is provided." }
+  ],
+  "resources": [
+    { "title": "Scouts BSA (Scouting America)", "text": "The official program: ranks, merit badges, and requirements.", "url": "https://www.scouting.org/programs/scouts-bsa/", "label": "scouting.org/scouts-bsa" },
+    { "title": "BeAScout", "text": "Find a troop near you and apply online.", "url": "https://beascout.scouting.org", "label": "beascout.scouting.org" },
+    { "title": "Scoutbook Plus", "text": "Track advancement with your my.scouting.org account.", "url": "https://advancements.scouting.org", "label": "advancements.scouting.org" },
+    { "title": "Scout Shop", "text": "Uniforms, handbooks, and insignia.", "url": "https://www.scoutshop.org", "label": "scoutshop.org" },
+    { "title": "Guide to Safe Scouting", "text": "Health and safety policies for every activity.", "url": "https://www.scouting.org/health-and-safety/gss/", "label": "Guide to Safe Scouting" },
+    { "title": "Health & Medical Record", "text": "The annual medical form for campouts and activities.", "url": "https://www.scouting.org/health-and-safety/ahmr/", "label": "Download the form" }
+  ],
+  "theme": { "primary": "#1f4d2e", "accent": "#c8a24a", "background": "#fdfcf6", "ink": "#1d2a22" }
+}

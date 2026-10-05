@@ -1,0 +1,63 @@
+{
+  "preset_name": "Kids club",
+  "terms": {
+    "unit": "Club",
+    "unit_lower": "club",
+    "groups": "Groups",
+    "group": "Group",
+    "member": "member",
+    "members": "members",
+    "leader": "leader",
+    "family": "family"
+  },
+  "program": {
+    "org_name": "",
+    "org_url": "",
+    "ages": "ages 5 to 13",
+    "welcome": "Everyone is welcome",
+    "about_title": "What We Do",
+    "about": [
+      "We're a hands-on club for kids. Members learn by doing: building things, getting outdoors, helping the community, and trying something new every month.",
+      "Families are part of the fun. Parents and guardians help run activities, and every adult volunteer is screened and trained before working with kids."
+    ],
+    "pillars": [
+      { "title": "Try New Things", "text": "A new skill or adventure every month, from knots to robots." },
+      { "title": "Get Outside", "text": "Hikes, park days, and outdoor games in every season." },
+      { "title": "Help Others", "text": "Service projects that make our neighborhood better." },
+      { "title": "Make Friends", "text": "A welcoming group where every kid belongs." }
+    ]
+  },
+  "groups": [
+    { "name": "Explorers", "ages": "Ages 5–7", "text": "Short, playful activities with a parent or guardian alongside." },
+    { "name": "Trailblazers", "ages": "Ages 8–10", "text": "Bigger projects, outdoor skills, and first chances to lead." },
+    { "name": "Leaders", "ages": "Ages 11–13", "text": "Plan activities, mentor younger members, and take on challenges." }
+  ],
+  "groups_intro": "Members meet in small groups by age, and the whole club comes together for big events.",
+  "join_steps": [
+    { "title": "Say Hello", "text": "Email us with your child's name and age. We'll answer any questions." },
+    { "title": "Visit a Meeting", "text": "Come see what we're about. No commitment, no cost." },
+    { "title": "Sign Up", "text": "Fill out the registration and permission forms, and you're in." }
+  ],
+  "join_link": { "label": "", "url": "" },
+  "uniform": "No uniform needed. Wear clothes that can get a little messy. Some clubs use a club T-shirt; ask us.",
+  "safety": {
+    "title": "Keeping Kids Safe",
+    "points": [
+      "Two trained, background-checked adults are present at every activity. No adult is ever alone with a child who isn't their own.",
+      "Parents and guardians are always welcome at meetings.",
+      "We post photos of members only with written permission from a parent or guardian, and never with a child's full name."
+    ],
+    "training_name": "",
+    "training_url": ""
+  },
+  "faq": [
+    { "q": "Who can join?", "a": "Kids {ages}. {welcome}." },
+    { "q": "When and where do you meet?", "a": "{meetings}. Location: {location}." },
+    { "q": "Can we visit before we join?", "a": "Yes! Come to any meeting. Email {email} first so we can watch for you." },
+    { "q": "How much does it cost?", "a": "{cost}" },
+    { "q": "Do parents need to stay?", "a": "Parents and guardians are always welcome, and younger members need an adult with them. We also need volunteers; no experience needed." },
+    { "q": "How do you keep kids safe?", "a": "Every adult volunteer is screened and trained, and two adults are present at every activity. See our Privacy & Safety page for our photo rules." }
+  ],
+  "resources": [],
+  "theme": { "primary": "#155e75", "accent": "#f59e0b", "background": "#fffdf8", "ink": "#1f2937" }
+}

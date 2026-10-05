@@ -1,0 +1,74 @@
+{
+  "preset_name": "Cub Scouts pack (Scouting America)",
+  "terms": {
+    "unit": "Pack",
+    "unit_lower": "pack",
+    "groups": "Dens",
+    "group": "Den",
+    "member": "Scout",
+    "members": "Scouts",
+    "leader": "leader",
+    "family": "family"
+  },
+  "program": {
+    "org_name": "Scouting America",
+    "org_url": "https://www.scouting.org/programs/cub-scouts/",
+    "ages": "in kindergarten through 5th grade",
+    "welcome": "Boys and girls are welcome",
+    "about_title": "What Is Cub Scouting?",
+    "about": [
+      "Cub Scouting is a family program for kids in kindergarten through 5th grade. Scouts learn by doing: hands-on activities, outdoor adventures, and service projects, working through age-appropriate adventures with their families.",
+      "Scouts live by the Scout Oath and Scout Law and the Cub Scout motto, \"Do Your Best.\" Adult leaders and parents guide, encourage, and support every Scout's journey."
+    ],
+    "pillars": [
+      { "title": "Character", "text": "Living the Scout Oath and Scout Law, day by day." },
+      { "title": "Adventure", "text": "Camping, hiking, and hands-on projects all year." },
+      { "title": "Family", "text": "Parents and guardians are part of every Scout's journey." },
+      { "title": "Service", "text": "Giving back to our community together." }
+    ]
+  },
+  "groups": [
+    { "name": "Lion", "ages": "Kindergarten", "text": "First steps into Scouting: short, fun adventures with an adult partner alongside." },
+    { "name": "Tiger", "ages": "1st grade", "text": "Curiosity-driven adventures exploring the community, always with an adult partner." },
+    { "name": "Wolf", "ages": "2nd grade", "text": "Bigger challenges in fitness, safety, and service, building confidence." },
+    { "name": "Bear", "ages": "3rd grade", "text": "Camping skills, crafts, and citizenship as Scouts grow more independent." },
+    { "name": "Webelos", "ages": "4th grade", "text": "Scouts start exploring what comes next, with more outdoor skills and leadership." },
+    { "name": "Arrow of Light", "ages": "5th grade", "text": "The capstone Cub Scout rank: Scouts lead, camp, and prepare to join a Scouts BSA troop." }
+  ],
+  "groups_intro": "One den per grade. Dens meet on their own, and the whole pack gathers for the pack meeting.",
+  "join_steps": [
+    { "title": "Contact Us", "text": "Email us with your Scout's name, grade, and school. We'll answer any questions." },
+    { "title": "Visit a Meeting", "text": "Come to a meeting and see what we're about." },
+    { "title": "Apply Online", "text": "Find our pack on BeAScout and complete the youth application. We'll help with the rest." }
+  ],
+  "join_link": { "label": "Find us on BeAScout", "url": "https://beascout.scouting.org" },
+  "uniform": "Scouts wear the Cub Scout uniform for meetings and ceremonies, plus the handbook for their rank. Both are available from the Scout Shop. Ask us about used uniforms.",
+  "safety": {
+    "title": "Youth Protection",
+    "points": [
+      "Every adult leader completes Scouting America's Safeguarding Youth training and a background check.",
+      "Two registered adults are present at every activity. No one-on-one contact between adults and youth.",
+      "We post photos of Scouts only with written permission from a parent or guardian, and never with a Scout's full name."
+    ],
+    "training_name": "Safeguarding Youth training",
+    "training_url": "https://www.scouting.org/training/youth-protection/"
+  },
+  "faq": [
+    { "q": "Who can join?", "a": "Kids {ages}. {welcome}." },
+    { "q": "When and where do you meet?", "a": "{meetings}. Location: {location}." },
+    { "q": "Can we visit before we join?", "a": "Yes! Come to any meeting. Email {email} first so we can watch for you." },
+    { "q": "How much does it cost?", "a": "{cost}" },
+    { "q": "Which den will my Scout be in?", "a": "One den per grade: Lion (K), Tiger (1st), Wolf (2nd), Bear (3rd), Webelos (4th), and Arrow of Light (5th)." },
+    { "q": "Do parents stay during meetings?", "a": "Yes. Cub Scouting is a family program, and adults stay on site during meetings. Lions and Tigers take part with an adult partner." },
+    { "q": "What does my Scout need?", "a": "A uniform and the handbook for their rank, both available from the Scout Shop. Ask us about used uniforms." }
+  ],
+  "resources": [
+    { "title": "Cub Scouts (Scouting America)", "text": "The official Cub Scout program: ranks, adventures, and family resources.", "url": "https://www.scouting.org/programs/cub-scouts/", "label": "scouting.org/cub-scouts" },
+    { "title": "BeAScout", "text": "Find a pack near you and apply online.", "url": "https://beascout.scouting.org", "label": "beascout.scouting.org" },
+    { "title": "Scoutbook Plus", "text": "Track your Scout's advancement with your my.scouting.org account.", "url": "https://advancements.scouting.org", "label": "advancements.scouting.org" },
+    { "title": "Scout Shop", "text": "Uniforms, handbooks, and insignia.", "url": "https://www.scoutshop.org", "label": "scoutshop.org" },
+    { "title": "Guide to Safe Scouting", "text": "Health and safety policies for every activity.", "url": "https://www.scouting.org/health-and-safety/gss/", "label": "Guide to Safe Scouting" },
+    { "title": "Health & Medical Record", "text": "The annual medical form every participant completes.", "url": "https://www.scouting.org/health-and-safety/ahmr/", "label": "Download the form" }
+  ],
+  "theme": { "primary": "#0b3d6e", "accent": "#f5c518", "background": "#fffef7", "ink": "#1f2a37" }
+}
