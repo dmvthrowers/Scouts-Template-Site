@@ -75,6 +75,7 @@ details p { margin: 0; padding: 0 1.2rem 1rem; }
 .cta { background: var(--navy); color: var(--white); text-align: center; padding: 3rem 0 2rem; }
 .cta h2 { color: var(--white); }
 .foot { background: var(--navy-dark); color: #e9eef5; text-align: center; padding: 1.5rem 0; font-size: .95rem; }
+.foot .credit { font-size: .8125rem; margin: 0; }
 .foot a { color: var(--white); display: inline-block; min-height: 44px; line-height: 44px; }
 
 @media (min-width: 760px) {

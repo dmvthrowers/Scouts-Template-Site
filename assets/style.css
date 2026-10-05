@@ -131,6 +131,8 @@ figcaption { text-align: center; font-size: .9rem; color: var(--muted); margin-t
 .footer-nav a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; padding: 0 .4rem; text-decoration: none; }
 .footer-nav a[aria-current="page"] { text-decoration: underline; }
 .footer-note { opacity: .85; font-size: .875rem !important; }
+.footer-credit { font-size: .8125rem !important; margin: 0 !important; }
+.footer-credit a { display: inline-block; min-height: 44px; line-height: 44px; }
 
 /* ---------- Larger screens ---------- */
 @media (min-width: 720px) {

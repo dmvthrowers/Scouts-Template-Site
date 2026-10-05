@@ -228,6 +228,9 @@ class Site:
         source = c["site"].get("source_url")
         source_html = (f'<p class="footer-source"><a href="{esc(source)}" rel="noopener noreferrer">'
                        f'Website source code</a></p>') if source else ""
+        credit_html = ('<p class="footer-credit">Site template by Brandon Rogers &amp; '
+                       '<a href="https://dmvthrowers.club/" rel="noopener noreferrer">DMV Throwers</a></p>'
+                       ) if c["site"].get("credit", True) else ""
         return f"""<footer class="site-footer">
   <div class="wrap">
     <nav class="footer-nav" aria-label="Footer navigation">
@@ -239,6 +242,7 @@ class Site:
     {f'<p>{socials}</p>' if socials else ''}
     {source_html}
     <p class="footer-note">&copy; {self.today.year} {esc(self.name)}{(' &mdash; ' + esc(self.group['city'])) if self.group.get('city') else ''}</p>
+    {credit_html}
   </div>
 </footer>"""
 

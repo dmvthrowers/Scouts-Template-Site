@@ -97,6 +97,7 @@ stays as it was until the problem is fixed.
 | A whole extra section on a page | `content/<page>.html` | See [Adding your own content](#adding-your-own-content). |
 | Page layout or new pages | `build.py` | One short function per page. |
 | Fonts, spacing, look | `assets/style.css` | |
+| Footer template credit | `site.jsonc` → `site.credit` | Small "Site template by" line. Set `false` to hide it; no credit is required. |
 
 **Overriding preset text:** anything in `site.jsonc` wins over the preset. For example, to rename
 the kids-club groups, add a `"groups": [ ... ]` list to `site.jsonc` in the same shape as in
