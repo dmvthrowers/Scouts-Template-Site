@@ -216,9 +216,20 @@ class Site:
             items.append(f'<li><a href="{root}{slug}.html"{cur}>{esc(label)}</a></li>')
         return "\n        ".join(items)
 
+    def email(self):
+        return (self.cfg["contact"].get("email") or "").strip()
+
+    def mail(self, subject="", text=None):
+        """Email link, or "" when no email is set yet (so we never emit a bare mailto:)."""
+        e = self.email()
+        if not e:
+            return ""
+        q = f"?subject={subject}" if subject else ""
+        return f'<a href="mailto:{esc(e)}{q}">{esc(text or e)}</a>'
+
     def footer(self, current, root):
         c = self.cfg
-        bits = [f'<a href="mailto:{esc(c["contact"]["email"])}">{esc(c["contact"]["email"])}</a>']
+        bits = [self.mail()] if self.email() else []
         for key, prefix in (("charter", "Chartered by "), ("council", "")):
             org = c.get(key) or {}
             if org.get("name"):
@@ -378,7 +389,7 @@ class Site:
         glance_html = "".join(
             f'<div class="card glance"><span class="label">{esc(k)}</span>'
             + (f'<p class="value">{esc(v)}</p>' if v else
-               f'<p class="value"><a href="mailto:{esc(c["contact"]["email"])}">{esc(c["contact"]["email"])}</a></p>')
+               f'<p class="value">{self.mail() or "<a href=" + chr(34) + "contact.html" + chr(34) + ">Contact page</a>"}</p>')
             + "</div>" for k, v in glance)
         body = f"""<section class="hero">
   <div class="wrap">
@@ -442,7 +453,7 @@ class Site:
         for l in c.get("leaders", []):
             if l.get("open"):
                 leaders.append(f'<li class="open-role"><span class="role">{esc(l["role"])}</span>'
-                               f'<span class="who">Open — <a href="mailto:{esc(c["contact"]["email"])}?subject=Volunteering">volunteer with us</a></span></li>')
+                               f'<span class="who">Open — {self.mail("Volunteering", "volunteer with us") or "<a href=" + chr(34) + "contact.html" + chr(34) + ">volunteer with us</a>"}</span></li>')
             else:
                 leaders.append(f'<li><span class="role">{esc(l["role"])}</span><span class="who">{esc(l.get("name", ""))}</span></li>')
         leaders_html = (f'<h2>Our {esc(t.get("leaders", "Leaders"))}</h2>\n    <ul class="leader-list">{"".join(leaders)}</ul>'
@@ -530,8 +541,8 @@ class Site:
                 warnings.append("calendar.embed_url should start with https://calendar.google.com/ (ignored).")
             else:
                 frame = (f'<iframe class="cal-frame" title="{esc(self.name)} calendar" src="{esc(embed)}" loading="lazy"></iframe>\n'
-                         f'    <p class="muted center">Calendar not loading? Email <a href="mailto:{esc(c["contact"]["email"])}">'
-                         f'{esc(c["contact"]["email"])}</a> for dates.</p>')
+                         f'    <p class="muted center">Calendar not loading? '
+                         + (f'Email {self.mail()} for dates.' if self.email() else 'Ask a leader at a meeting for dates.') + '</p>')
         season = f' We meet {esc(c["meetings"]["season"])}.' if c["meetings"].get("season") else ""
         mtgs = self.terms.get("meetings", "meetings")
         body = f"""{self.page_head("Calendar", f"{mtgs.capitalize()}, events, and activities.")}
@@ -574,7 +585,7 @@ class Site:
 <section class="section">
   <div class="wrap">
     {grid}
-    <p class="muted center">Have photos to share? Send them to <a href="mailto:{esc(c["contact"]["email"])}">{esc(c["contact"]["email"])}</a>. We only post photos of kids with a parent's written permission.</p>
+    <p class="muted center">Have photos to share? {("Send them to " + self.mail() + ".") if self.email() else "Give them to a leader at a meeting."} We only post photos of kids with a parent's written permission.</p>
   </div>
 </section>"""
         return "Gallery", f"Photos from {self.name} {mtgs} and events.", body, None
@@ -635,10 +646,10 @@ class Site:
   <div class="wrap narrow">
     <div class="card contact-card">
       <h2>Get in Touch</h2>
-      <p class="big-email"><a href="mailto:{esc(c["contact"]["email"])}">{esc(c["contact"]["email"])}</a></p>
+      {('<p class="big-email">' + self.mail() + '</p>') if self.email() else '<p>Our troop email address is coming soon. Come to a meeting or check back here.</p>'}
       {phone_html}
       <p><strong>{esc(mtgs.capitalize())}:</strong> {esc(c["meetings"]["summary"])}<br>{esc(c["meetings"]["location"])}</p>
-      <p>Just show up, or email first and we'll watch for you.</p>
+      <p>{"Just show up, or email first and we'll watch for you." if self.email() else "Just show up. We'll watch for you."}</p>
       {social_html}
     </div>
   </div>
@@ -662,7 +673,7 @@ class Site:
     <h2>{esc(c["safety"]["title"])}</h2>
     <ul>{"".join(f"<li>{esc(p)}</li>" for p in c["safety"]["points"])}</ul>
     <h2>Photo Removal</h2>
-    <p>Want a photo taken down? Email <a href="mailto:{esc(c["contact"]["email"])}">{esc(c["contact"]["email"])}</a> and we'll remove it promptly.</p>
+    <p>Want a photo taken down? {("Email " + self.mail()) if self.email() else "Tell a leader at a meeting"} and we'll remove it promptly.</p>
   </div>
 </section>"""
         return "Privacy & Safety", f"How {self.name} handles your information and keeps kids safe.", body, None

@@ -19,7 +19,7 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
    - upcoming events
    - optional: brand colors and a public Google Calendar embed URL
 
-   Never invent facts. Leave a value empty (`""`), or use "to be announced", rather than guess.
+   Never invent facts. Leave a value empty (`""`), or use "to be announced", rather than guess. An empty `contact.email` is fine: the site then sends visitors to the contact page instead of showing an email link.
 2. **Edit `site.jsonc` only** for content. `examples/pack-1125.jsonc` is a complete real-world
    example; it's a good model for how fields are filled in. Keep `//` comments on their own lines. Change preset
    wording by adding the same key to `site.jsonc`, not by editing the preset.
