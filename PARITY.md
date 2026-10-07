@@ -27,13 +27,31 @@ before the PR merges.
 
 ## Known gaps
 
-Checked 2026-10-07. Remove a row when it's closed.
+Audited 2026-10-07. Remove a row when it's closed.
 
-| Gap | Where | Note |
-|---|---|---|
-| Troop `build.py` differs from the template's (32 changed lines) | `Girl-Scout-Troop-80301` | Not synced back yet. Decide line by line: generic fixes come here, troop settings move to `site.jsonc` |
-| Troop has `DEPLOY.md` and `TEMPLATE-README.md` that the template doesn't | `Girl-Scout-Troop-80301` | Decide whether they're troop-only or belong here |
-| Pack site vs. the template's pages and features | `pack1125-dumfries` | Not audited yet; do a first pass and fill in this row |
+### Girl Scout Troop 80301 (behind the template)
+
+The troop's `build.py` is an older copy. Every difference is a template improvement the troop
+doesn't have yet, so the fix is to copy the template's `build.py` into the troop repo, then
+rebuild and run the check.
+
+| Gap | Note |
+|---|---|
+| Custom words (`terms`): "Visit a Meeting", "Leaders", "meetings", "Regular Meetings" | Hard-coded in the troop copy; configurable in the template |
+| Automatic site address on Vercel (`VERCEL_PROJECT_PRODUCTION_URL`) | Missing from the troop copy |
+| "Learn to Yo-Yo" resource credit | In the template; the troop can keep or delete it after the copy |
+| Sports presets (soccer, baseball, basketball, football, sports club) | Not in the troop copy; harmless, but copy `presets/` too so a later update is one step |
+| `DEPLOY.md` and `TEMPLATE-README.md` | Only in the troop repo. Decide whether they're troop-only or belong in the template |
+
+### Cub Scout Pack 1125 (hand-written)
+
+| Gap | Note |
+|---|---|
+| Loads Google Fonts on every page | The template promises no outside fonts. Self-host the fonts or use the system stack, and drop `fonts.googleapis.com` and `fonts.gstatic.com` from the CSP |
+| Official rank badge images (`badge-*.png`) on the dens page | The template asks for official insignia only when the unit supplies them and confirms it may use them. Confirm, or swap for plain rank names |
+| `scripts/check_site.py` differs from the template's | Bring the pack's check in line so both catch the same problems |
+| A "Dens" page where the template has "Groups" | Same idea; fine as is. Port any feature the pack's page has that the template's lacks |
+| Same pages otherwise (home, about, join, calendar, gallery, resources, FAQ, contact, privacy, 404) | No gap |
 
 This file, like `showcase/` and `examples/`, only applies to the original template repository. Delete
 it in your own copy.
