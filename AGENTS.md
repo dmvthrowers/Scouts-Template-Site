@@ -68,6 +68,10 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
 - **Extra content:** `content/<slug>.html` is appended to that page. Plain HTML only.
 - **Showcase:** `showcase/`, `examples/`, and `scripts/build_showcase.py` only run in the original
   template repository. Ignore them (or delete them) in a user's copy.
+- **Parity (original template repository only):** two live sites are built from this template, and
+  they stay in step with it. A change here or in either live site ports to the others, is logged as a
+  gap, or is marked site-only. Read [`PARITY.md`](PARITY.md) before changing `build.py`,
+  `scripts/check_site.py` or `assets/`.
 - **No dependencies:** keep `build.py` and `scripts/check_site.py` standard-library Python 3.9+.
 
 ## Useful commands
