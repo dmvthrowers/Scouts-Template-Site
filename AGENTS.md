@@ -80,6 +80,9 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
   they stay in step with it. A change here or in either live site ports to the others, is logged as a
   gap, or is marked site-only. Read [`PARITY.md`](PARITY.md) before changing `build.py`,
   `scripts/check_site.py` or `assets/`.
+- **Smoke test:** `scripts/smoke_test.js` and `.github/workflows/smoke-test.yml` click through every page of the built showcase
+  and its examples at phone width. They only run in the original template repository. Run it after changing `build.py`
+  or `assets/`: `python3 scripts/build_showcase.py && node scripts/smoke_test.js` (needs Node and Playwright).
 - **No dependencies:** keep `build.py` and `scripts/check_site.py` standard-library Python 3.9+.
 
 ## Useful commands
