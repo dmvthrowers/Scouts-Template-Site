@@ -53,7 +53,9 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
   organization unless the user confirms the club is a member.
 - **Kids' privacy:**
   - No full names of children anywhere.
-  - Photos only with the user's confirmation of written parent/guardian permission.
+  - Photos only with the user's confirmation of written parent/guardian permission. Never set
+    `photos.permission_confirmed` to `true` yourself; the user has to say so. The check fails on what looks like a
+    child's full name; fix the text, don't switch `photos.first_names_only` off.
   - Resize photos to ~1200px and under 500 KB, and strip EXIF/GPS metadata.
   - Never publish a personal home address. Avoid personal phone numbers unless the person explicitly agrees.
 - **Security:**

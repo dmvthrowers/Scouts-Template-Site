@@ -8,6 +8,9 @@ size, invalid JSON-LD, missing title/description, the skip link, main#main-conte
 and that the header, menu, and footer are identical on every page.
 Security: every page has the Content Security Policy and referrer tags, with no
 'unsafe-inline', no inline styles, scripts or event handlers, and no http:// links.
+Privacy: unless site.jsonc sets photos.first_names_only to false, flags text that looks like a
+child's full name ("Emma Johnson"): a common first name followed by a capitalized word. Names in the
+leaders list and in photos.allowed_names are fine. It is a guard, not a guarantee: read your pages too.
 With --real (your copy's deploy workflow), it also fails while the template's sample content
 (example.org addresses, the Maple Street sample club) is still on the site.
 Exits non-zero if anything fails. No installs needed.
@@ -33,6 +36,50 @@ SITE = (ROOT / args[0]).resolve() if args else ROOT / "_site"
 base_file = ROOT / ".build-base-path"
 BASE = args[1] if len(args) > 1 else (base_file.read_text().strip() if base_file.exists() else "/")
 errors = []
+
+# Common US first names that are not also everyday words or places (so "Jackson Park" and "Grace Notes"
+# are not flagged). A guard against careless captions, not a name detector.
+FIRST_NAMES = set("""
+Aaliyah Abigail Adam Adrian Aiden Alexander Alexis Alice Alyssa Amelia Amy Andrew Angel Anna Anthony Aria Ariana
+Arthur Ashley Audrey Aubrey Ava Benjamin Bella Brandon Brayden Brian Brianna Caleb Camila Carter Charles Charlotte
+Chloe Christian Christopher Claire Colton Connor Daniel David Dylan Eleanor Elijah Elizabeth Ella Ellie Emily Emma
+Ethan Eva Evan Evelyn Gabriel Gavin Hailey Hannah Harper Henry Isaac Isabella Isaiah Jack Jacob Jaden James Jasmine
+Jayden Jeremiah Jessica Joel John Jonathan Joseph Joshua Josiah Julia Julian Kaitlyn Katherine Kayla Kevin Kylie
+Landon Lauren Layla Leah Leo Levi Liam Lillian Lily Logan Lucas Lucy Luke Madeline Maya Mia Michael Mila Natalie
+Nathan Nevaeh Nicholas Noah Nora Olivia Owen Penelope Riley Robert Ryan Samantha Samuel Sarah Savannah Scarlett
+Sebastian Sofia Sophia Sophie Stella Tyler Victoria Violet Vivian William Wyatt Xavier Zachary Zoe Zoey
+""".split())
+# Words that follow a first name when it is really a place or group ("Harper Elementary", "Riley Park").
+PLACE_WORDS = set("""
+Academy Avenue Baptist Bridge Camp Center Church Circle Club Community Court Creek Drive Elementary Field Fields Forest
+Garden Gardens Hall High Hill Hills Lake Lane Library Lodge Middle Park Pavilion Pool Preschool Ridge River Road School
+Scouts Square Station Street Temple Trail Troop Pack Way Woods
+""".split())
+SURNAME = re.compile(r"\b([A-Z][a-z]{2,})\s+([A-Z][a-z'\-]{2,})\b")
+
+
+class Text(HTMLParser):
+    """Visible text of a page (plus img alt text), minus the leaders list, footer, scripts and styles."""
+    def __init__(self):
+        super().__init__()
+        self.parts, self.skip, self.depth, self.stack = [], 0, 0, []
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        skipping = tag in ("script", "style", "title", "footer") or "leader-list" in (a.get("class") or "")
+        if tag not in ("br", "img", "meta", "link", "input", "hr"):
+            self.stack.append(skipping)
+            self.skip += skipping
+        if tag == "img" and a.get("alt"):
+            self.parts.append(a["alt"])
+
+    def handle_endtag(self, tag):
+        if self.stack and tag not in ("br", "img", "meta", "link", "input", "hr"):
+            self.skip -= self.stack.pop()
+
+    def handle_data(self, d):
+        if not self.skip:
+            self.parts.append(d)
 
 
 class Page(HTMLParser):
@@ -155,6 +202,18 @@ for page in pages:
         if not (SITE / (path or "index.html")).exists():
             err(f"broken link: {ref}")
 
+privacy_file = ROOT / ".build-privacy.json"
+privacy = json.loads(privacy_file.read_text()) if privacy_file.exists() and SITE == ROOT / "_site" else {}
+if privacy.get("first_names_only", True):
+    allowed = {n.strip().lower() for n in privacy.get("allowed_names", [])}
+    for page in pages:
+        t = Text()
+        t.feed(page.read_text(encoding="utf-8"))
+        text = re.sub(r"\s+", " ", " ".join(t.parts))
+        for first, last in SURNAME.findall(text):
+            if first in FIRST_NAMES and last not in PLACE_WORDS and f"{first} {last}".lower() not in allowed:
+                errors.append(f'{page.name}: "{first} {last}" looks like a full name. Use first names only, '
+                              'or list an adult in photos.allowed_names (or set photos.first_names_only to false).')
 if REAL:
     found = sorted({m for page in pages for m in SAMPLE_MARKERS if m in page.read_text(encoding="utf-8")})
     if found:
