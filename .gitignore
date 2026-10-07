@@ -1,6 +1,7 @@
 # Build output (GitHub Actions rebuilds it on every change)
 _site/
 .build-base-path
+.build-privacy.json
 _showcase_test/
 
 # OS and editor clutter

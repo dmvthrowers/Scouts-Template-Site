@@ -51,6 +51,7 @@ rebuild and run the check.
 | Official rank badge images (`badge-*.png`) on the dens page | The template asks for official insignia only when the unit supplies them and confirms it may use them. Confirm, or swap for plain rank names |
 | `scripts/check_site.py` differs from the template's | Bring the pack's check in line so both catch the same problems |
 | A "Dens" page where the template has "Groups" | Same idea; fine as is. Port any feature the pack's page has that the template's lacks |
+| Full-name check and gallery permission gate (`photos` settings, template PR for build plan 1.15) | Hand-written HTML has no settings file. Port the check by copying the template's `scripts/check_site.py`; the pack's gallery is empty today |
 | Same pages otherwise (home, about, join, calendar, gallery, resources, FAQ, contact, privacy, 404) | No gap |
 
 This file, like `showcase/` and `examples/`, only applies to the original template repository. Delete

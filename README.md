@@ -119,8 +119,12 @@ the kids-club groups, add a `"groups": [ ... ]` list to `site.jsonc` in the same
 
 ## Photos and kids' privacy
 
-1. **Get written permission** from a parent or guardian before posting any photo of a child.
-2. **Never name kids** in captions or alt text ("Scouts on a hike", not names).
+1. **Get written permission** from a parent or guardian before posting any photo of a child. Then set
+   `"permission_confirmed": true` under `photos` in `site.jsonc`. Until you do, the gallery shows no photos
+   and the build says so.
+2. **Never name kids** in captions or alt text ("Scouts on a hike", not names). The check fails when a page
+   seems to name a child in full ("Emma Johnson"). Leaders are exempt; list any other adult who agreed to
+   be named under `photos.allowed_names`. It is a guard against slips, so read your captions too.
 3. **Resize and clean photos** before uploading: about 1200 pixels wide and under 500 KB. Strip the
    location data. On most phones, turn off location in the share options, or use a free tool such
    as [Squoosh](https://squoosh.app) in your browser.

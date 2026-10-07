@@ -561,7 +561,13 @@ class Site:
     def page_gallery(self):
         c = self.cfg
         figs = []
-        for ph in c.get("gallery", []):
+        photos = c.get("photos") or {}
+        listed = c.get("gallery", [])
+        if listed and photos.get("permission_confirmed") is not True:
+            warnings.append(f'Your gallery lists {len(listed)} photo(s), but none are shown: set photos.permission_confirmed '
+                            'to true in site.jsonc once you have written permission from a parent or guardian for every child in them.')
+            listed = []
+        for ph in listed:
             src = ROOT / "assets" / ph["src"]
             if not src.exists():
                 warnings.append(f'Gallery photo not found: assets/{ph["src"]}')
@@ -763,6 +769,10 @@ class Site:
         # The base path lets scripts/check_site.py resolve 404.html's absolute links.
         if OUT == ROOT / "_site":
             (ROOT / ".build-base-path").write_text(self.base_path)
+            photos = self.cfg.get("photos") or {}
+            (ROOT / ".build-privacy.json").write_text(json.dumps({
+                "first_names_only": photos.get("first_names_only") is not False,
+                "allowed_names": [n for n in photos.get("allowed_names", []) if isinstance(n, str)]}))
 
 
 def main():

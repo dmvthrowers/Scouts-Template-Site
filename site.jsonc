@@ -105,6 +105,19 @@
   // The calendar must be public. Leave "" to show only the events list.
   "calendar": { "embed_url": "" },
 
+  // Photo rules. The gallery stays empty until you confirm permission.
+  "photos": {
+    // Set to true ONLY when a parent or guardian has given written permission for every
+    // child in every photo you list below. While false, the gallery shows no photos.
+    "permission_confirmed": false,
+    // true: the check fails if a page seems to name a child in full ("Emma Johnson").
+    // Use first names only, or no names. Set to false only if your group needs full names.
+    "first_names_only": true,
+    // Adults who agreed to be named in full on the site, if they are not in "leaders" above.
+    // Leaders are never flagged.
+    "allowed_names": []
+  },
+
   // Photos. Put files in assets/images/gallery/. Only post kids with written permission.
   // { "src": "images/gallery/hike.jpg", "alt": "Kids on a forest trail", "caption": "Fall Hike" }
   "gallery": [],
