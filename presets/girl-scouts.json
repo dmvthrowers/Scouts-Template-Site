@@ -53,6 +53,7 @@
     "training_name": "Girl Scouts volunteer resources",
     "training_url": "https://www.girlscouts.org/en/members/for-volunteers.html"
   },
+  "youth_protection": { "show": true },
   "faq": [
     { "q": "Who can join?", "a": "Girls {ages}. {welcome}." },
     { "q": "When and where do you meet?", "a": "{meetings}. Location: {location}." },
