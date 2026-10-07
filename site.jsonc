@@ -79,6 +79,17 @@
     "aid_url": ""
   },
 
+  // A short Youth Protection section on the Join page. The Scouts presets turn it on; add
+  // "show": true to use it with any preset, or "show": false to hide it.
+  // The two-adult line is on by default: set "two_adult_rule": false if it isn't true for you.
+  // "links" adds official training or policy pages (your safety.training_url is added for you).
+  "youth_protection": {
+    // "show": true,
+    // "two_adult_rule": true,
+    // "rule_text": "Your own wording for the two-adult rule.",
+    "links": []
+  },
+
   // Sponsoring or chartering organization ("" to hide)
   "charter": { "name": "", "url": "" },
 

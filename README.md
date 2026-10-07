@@ -85,6 +85,10 @@ first run fails. Go to **Actions → Build and deploy → Run workflow** to run 
 `site.jsonc` or a missing photo. Click the run to see a plain-English message. Your live site
 stays as it was until the problem is fixed.
 
+**"The site still shows the template's sample content"** means `site.jsonc` still has the sample
+club (Maple Street Kids Club, Jordan Example, `hello@example.org`). The check won't publish a site
+with someone else's placeholder details; replace them with your unit's and push again.
+
 ---
 
 ## What to change (and where)
@@ -114,6 +118,16 @@ stays as it was until the problem is fixed.
 **Overriding preset text:** anything in `site.jsonc` wins over the preset. For example, to rename
 the kids-club groups, add a `"groups": [ ... ]` list to `site.jsonc` in the same shape as in
 `presets/kids-club.json`.
+
+---
+
+## Youth protection
+
+The Scouts presets add a short **Youth Protection** section to the Join page: the two-adult rule, a link
+to the official training, and a link to the full safety list on the Privacy & Safety page. For any other
+preset, add `"youth_protection": { "show": true }` to `site.jsonc`. Add more official links with `links`
+(`{ "label": "...", "url": "https://..." }`), reword the rule with `rule_text`, or set `"two_adult_rule": false`
+if it isn't true for your group. Say only what your group actually does.
 
 ---
 
@@ -344,6 +358,7 @@ scripts/check_site.py   ← checks the built site (links, accessibility, securit
 .github/workflows/deploy.yml  ← builds, checks, and publishes on every change, plus weekly
 vercel.json             ← build settings if you host on Vercel (ignored elsewhere)
 AGENTS.md               ← instructions for AI coding agents
+DEPLOY.md               ← your group's maintenance checklist: who looks after the site, what's left to do (fill it in)
 examples/               ← finished settings files to copy (a real pack plus demos)
 showcase/, scripts/build_showcase.py  ← the template's own showcase page (safe to delete in your copy)
 ```

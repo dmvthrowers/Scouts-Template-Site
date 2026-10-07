@@ -53,6 +53,7 @@
     "training_name": "Safeguarding Youth training",
     "training_url": "https://www.scouting.org/training/youth-protection/"
   },
+  "youth_protection": { "show": true },
   "faq": [
     { "q": "Who can join?", "a": "Youth {ages}. {welcome}." },
     { "q": "When and where do you meet?", "a": "{meetings}. Location: {location}." },

@@ -11,6 +11,8 @@ Security: every page has the Content Security Policy and referrer tags, with no
 Privacy: unless site.jsonc sets photos.first_names_only to false, flags text that looks like a
 child's full name ("Emma Johnson"): a common first name followed by a capitalized word. Names in the
 leaders list and in photos.allowed_names are fine. It is a guard, not a guarantee: read your pages too.
+With --real (your copy's deploy workflow), it also fails while the template's sample content
+(example.org addresses, the Maple Street sample club) is still on the site.
 Exits non-zero if anything fails. No installs needed.
 """
 import json
@@ -22,6 +24,13 @@ from urllib.parse import urlparse, unquote
 
 ROOT = Path(__file__).resolve().parent.parent
 args = sys.argv[1:]
+# --real: this is someone's live site, so the template's sample content must be gone.
+# Your copy's deploy workflow passes it; the template's own showcase doesn't.
+REAL = "--real" in args
+args = [a for a in args if a != "--real"]
+# Text that only appears in the template's sample settings. Reserved example domains never belong
+# on a real site.
+SAMPLE_MARKERS = ("example.org", "example.com", "Maple Street Kids Club", "Jordan Example", "Springfield Community Center")
 # Optional: check_site.py [SITE_DIR [BASE_PATH]] (used for the showcase's example sites)
 SITE = (ROOT / args[0]).resolve() if args else ROOT / "_site"
 base_file = ROOT / ".build-base-path"
@@ -205,6 +214,11 @@ if privacy.get("first_names_only", True):
             if first in FIRST_NAMES and last not in PLACE_WORDS and f"{first} {last}".lower() not in allowed:
                 errors.append(f'{page.name}: "{first} {last}" looks like a full name. Use first names only, '
                               'or list an adult in photos.allowed_names (or set photos.first_names_only to false).')
+if REAL:
+    found = sorted({m for page in pages for m in SAMPLE_MARKERS if m in page.read_text(encoding="utf-8")})
+    if found:
+        errors.append("the site still shows the template's sample content (" + ", ".join(found) + "). "
+                      "Put your own unit's details in site.jsonc: name, meeting place, contact email and leaders.")
 
 reference = (SITE / "about.html").read_text(encoding="utf-8")
 for label, start, end in (("header", "<header", "</header>"), ("footer", "<footer", "</footer>")):

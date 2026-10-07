@@ -484,6 +484,35 @@ class Site:
 </section>"""
         return "About", f"About {self.name}: who we are, what we do, and who leads us.", body, None
 
+    def youth_protection(self):
+        """A short "Youth Protection" section for the Join page, when youth_protection.show is true."""
+        c = self.cfg
+        yp = c.get("youth_protection") or {}
+        if yp.get("show") is not True:
+            return ""
+        lines = []
+        if yp.get("two_adult_rule", True):
+            rule = yp.get("rule_text") or ("Two adults, always. At least two approved adults are with the kids at every "
+                                           "meeting and activity, and no adult is ever alone with a child.")
+            lines.append(f"<p><strong>{esc(rule)}</strong></p>")
+        links = list(yp.get("links") or [])
+        if c["safety"].get("training_url"):
+            links.insert(0, {"label": c["safety"].get("training_name") or "Training for adult volunteers",
+                             "url": c["safety"]["training_url"]})
+        links = [l for l in links if l.get("url") and l.get("label")]
+        if links:
+            items = "".join(f"<li>{ext_link(l['url'], l['label'])}</li>" for l in links)
+            lines.append(f'<p>Official training and policies for adult volunteers:</p>\n    <ul class="inline-list">{items}</ul>')
+        lines.append('<p><a href="privacy.html#safety">Read how we keep kids safe</a></p>')
+        return f"""
+<section class="section">
+  <div class="wrap narrow">
+    <h2>{esc(c["safety"]["title"])}</h2>
+    {chr(10).join("    " + l if i else l for i, l in enumerate(lines))}
+  </div>
+</section>
+"""
+
     def page_join(self):
         c, t = self.cfg, self.terms
         steps = "".join(f'\n  <li class="step"><h3>{esc(s["title"])}</h3><p>{esc(self.fill(s["text"]))}</p></li>'
@@ -504,7 +533,7 @@ class Site:
     {join_btn}
   </div>
 </section>
-
+{self.youth_protection()}
 <section class="section section-alt">
   <div class="wrap">
     <div class="cards cards-3">
@@ -676,7 +705,7 @@ class Site:
       {ext_link("https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement", "GitHub Privacy Statement")}.{cal}</p>
     <h2>When You Email Us</h2>
     <p>We use your name, email, and anything you share only to answer you and run our activities. We never sell or share it.</p>
-    <h2>{esc(c["safety"]["title"])}</h2>
+    <h2 id="safety">{esc(c["safety"]["title"])}</h2>
     <ul>{"".join(f"<li>{esc(p)}</li>" for p in c["safety"]["points"])}</ul>
     <h2>Photo Removal</h2>
     <p>Want a photo taken down? {("Email " + self.mail()) if self.email() else "Tell a leader at a meeting"} and we'll remove it promptly.</p>
