@@ -41,7 +41,7 @@ rebuild and run the check.
 | Automatic site address on Vercel (`VERCEL_PROJECT_PRODUCTION_URL`) | Missing from the troop copy |
 | "Learn to Yo-Yo" resource credit | In the template; the troop can keep or delete it after the copy |
 | Sports presets (soccer, baseball, basketball, football, sports club) | Not in the troop copy; harmless, but copy `presets/` too so a later update is one step |
-| `DEPLOY.md` and `TEMPLATE-README.md` | Only in the troop repo. Decide whether they're troop-only or belong in the template |
+| `DEPLOY.md` and `TEMPLATE-README.md` | `DEPLOY.md` is now in the template as a fill-in maintenance checklist (build plan 1.19b); keep the troop's filled-in version. `TEMPLATE-README.md` is a stale copy of this README: delete it from the troop |
 
 ### Cub Scout Pack 1125 (hand-written)
 

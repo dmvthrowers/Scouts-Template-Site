@@ -354,6 +354,7 @@ scripts/check_site.py   ← checks the built site (links, accessibility, securit
 .github/workflows/deploy.yml  ← builds, checks, and publishes on every change, plus weekly
 vercel.json             ← build settings if you host on Vercel (ignored elsewhere)
 AGENTS.md               ← instructions for AI coding agents
+DEPLOY.md               ← your group's maintenance checklist: who looks after the site, what's left to do (fill it in)
 examples/               ← finished settings files to copy (a real pack plus demos)
 showcase/, scripts/build_showcase.py  ← the template's own showcase page (safe to delete in your copy)
 ```

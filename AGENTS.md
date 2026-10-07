@@ -41,7 +41,9 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
    "Custom domain" section, then re-run the workflow. Don't commit a `CNAME` file or set
    `site.url`; on GitHub Pages the address comes from the Pages settings automatically. Verify the
    new address returns 200 and its sitemap uses it.
-6. **Report** the live URL and anything the user still needs to do. Typical items: making the
+6. **Fill in `DEPLOY.md`** with the live address, who looks after the site (ask the user), what is filled in, and
+   what is still open. Replace every [bracket]; don't leave placeholders in a user's copy.
+7. **Report** the live URL and anything the user still needs to do. Typical items: making the
    Google Calendar public, adding a custom domain, turning on two-factor login.
 
 ## Rules
