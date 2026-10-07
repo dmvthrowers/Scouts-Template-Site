@@ -133,6 +133,15 @@
   // { "src": "images/gallery/hike.jpg", "alt": "Kids on a forest trail", "caption": "Fall Hike" }
   "gallery": [],
 
+  // Forms library (permission slips, medical forms, registration). A "Forms" page and menu item
+  // appear only when this list has something in it. Each form is a file you upload to
+  // assets/forms/ ("file") or an https:// link ("url"). "updated" is the date you last checked it
+  // (YYYY-MM-DD). "category" groups the cards, e.g. "Permission", "Medical", "Registration".
+  // Never put a filled-in form here: only blank ones.
+  // { "title": "Trip Permission Slip", "text": "Needed for overnight trips.", "file": "trip-permission.pdf",
+  //   "updated": "2026-09-01", "category": "Permission", "label": "Download PDF" }
+  "forms": [],
+
   // Extra links for the Resources page (added after the preset's links)
   // { "title": "Our Sign-up Form", "text": "Register for events.", "url": "https://...", "label": "Sign up" }
   "links": [],

@@ -121,6 +121,23 @@ the kids-club groups, add a `"groups": [ ... ]` list to `site.jsonc` in the same
 
 ---
 
+## Forms (optional)
+
+Permission slips, medical forms and registration sheets can live on their own **Forms** page. List them under
+`forms` in `site.jsonc`. The page and its menu item only appear once you list at least one.
+
+```jsonc
+"forms": [
+  { "title": "Trip Permission Slip", "text": "Needed for overnight trips.", "file": "trip-permission.pdf",
+    "updated": "2026-09-01", "category": "Permission" }
+]
+```
+
+- **`file`** is a PDF you upload to `assets/forms/` (**Add file → Upload files**). Or use **`url`** for an `https://` link, such as your council's page.
+- **`updated`** is the date you last checked the form. The build reminds you when one is over a year old.
+- **`category`** groups the cards ("Permission", "Medical", "Registration").
+- Only blank forms belong here. Never upload a filled-in one.
+
 ## Youth protection
 
 The Scouts presets add a short **Youth Protection** section to the Join page: the two-adult rule, a link
