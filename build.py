@@ -552,8 +552,9 @@ class Site:
                         f'<h3>{esc(gp["name"])}</h3><p>{esc(gp["text"])}</p></div>' for gp in c["groups"])
         body = f"""{self.page_head(f"Our {t['groups']}", c.get("groups_intro", ""))}
 
-<section class="section">
+<section class="section" aria-labelledby="groups-heading">
   <div class="wrap">
+    <h2 id="groups-heading" class="sr-only">{esc(t['groups'])}</h2>
     <div class="cards cards-3">{cards}
     </div>
   </div>
@@ -638,8 +639,9 @@ class Site:
             cards = '\n  <div class="card"><h3>Questions?</h3><p>Answers to common questions.</p><p><a href="faq.html">Read the FAQ</a></p></div>'
         body = f"""{self.page_head("Resources", "Helpful links for families.")}
 
-<section class="section">
+<section class="section" aria-labelledby="links-heading">
   <div class="wrap">
+    <h2 id="links-heading" class="sr-only">Links</h2>
     <div class="cards cards-3">{cards}
     </div>
   </div>
