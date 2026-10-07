@@ -91,3 +91,5 @@ python3 build.py --serve                     # build + preview at http://localho
 python3 build.py --base-url https://x.org/   # build for a specific address (canonical URLs, sitemap)
 python3 scripts/check_site.py                # must print "OK"
 ```
+
+- **Accessibility check:** after changing markup or styles, run `python3 scripts/build_showcase.py && node scripts/a11y_test.js` (needs Playwright and axe-core; see `.github/workflows/a11y.yml`). It fails on serious or critical axe problems at 360px and 1100px.
