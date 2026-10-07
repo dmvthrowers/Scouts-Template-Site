@@ -59,6 +59,8 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
   - No `http://` links.
   - No trackers, analytics, or third-party scripts unless the user asks. If they do, update the
     CSP in `Site.csp()` in `build.py` and the Privacy page text.
+- **Youth protection section:** `youth_protection.two_adult_rule` is on by default. Ask the user whether it is true for
+  their group before showing the section on a non-Scouts preset, and never invent training links.
 - **Trademarks:** don't add official logos, badges, or insignia of Scouting America or Girl Scouts
   of the USA unless the user supplies them and confirms they may use them.
 - **Consistency:** every page shares one header and footer (built by `Site.layout` and

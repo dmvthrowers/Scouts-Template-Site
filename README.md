@@ -121,6 +121,16 @@ the kids-club groups, add a `"groups": [ ... ]` list to `site.jsonc` in the same
 
 ---
 
+## Youth protection
+
+The Scouts presets add a short **Youth Protection** section to the Join page: the two-adult rule, a link
+to the official training, and a link to the full safety list on the Privacy & Safety page. For any other
+preset, add `"youth_protection": { "show": true }` to `site.jsonc`. Add more official links with `links`
+(`{ "label": "...", "url": "https://..." }`), reword the rule with `rule_text`, or set `"two_adult_rule": false`
+if it isn't true for your group. Say only what your group actually does.
+
+---
+
 ## Photos and kids' privacy
 
 1. **Get written permission** from a parent or guardian before posting any photo of a child.
