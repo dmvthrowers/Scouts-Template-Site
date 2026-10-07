@@ -85,6 +85,10 @@ first run fails. Go to **Actions → Build and deploy → Run workflow** to run 
 `site.jsonc` or a missing photo. Click the run to see a plain-English message. Your live site
 stays as it was until the problem is fixed.
 
+**"The site still shows the template's sample content"** means `site.jsonc` still has the sample
+club (Maple Street Kids Club, Jordan Example, `hello@example.org`). The check won't publish a site
+with someone else's placeholder details; replace them with your unit's and push again.
+
 ---
 
 ## What to change (and where)
