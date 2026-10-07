@@ -108,6 +108,16 @@
   // { "src": "images/gallery/hike.jpg", "alt": "Kids on a forest trail", "caption": "Fall Hike" }
   "gallery": [],
 
+  // Sample forms for the demo. A real troop links its own files (assets/forms/) or its council's pages.
+  "forms": [
+    { "title": "Sample Permission Slip", "text": "Sample entry. Needed for trips away from the meeting place.",
+      "url": "https://example.org/permission-slip.pdf", "updated": "2026-09-01", "category": "Permission" },
+    { "title": "Sample Medical Form", "text": "Sample entry. One per Scout, kept by the leaders.",
+      "url": "https://example.org/medical-form.pdf", "updated": "2026-09-01", "category": "Medical" },
+    { "title": "Sample Registration Form", "text": "Sample entry. For new families.",
+      "url": "https://example.org/registration.pdf", "updated": "2026-09-01", "category": "Registration" }
+  ],
+
   // Extra links for the Resources page (added after the preset's links)
   // { "title": "Our Sign-up Form", "text": "Register for events.", "url": "https://...", "label": "Sign up" }
   "links": [],

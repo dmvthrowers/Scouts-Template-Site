@@ -185,8 +185,10 @@ class Site:
         self.has_calendar = bool(cfg.get("calendar", {}).get("embed_url"))
         groups_label = self.terms.get("groups", "Groups")
         self.pages = [("index", "Home"), ("about", "About"), ("join", "Join"), ("groups", groups_label),
-                      ("calendar", "Calendar"), ("gallery", "Gallery"), ("resources", "Resources"),
-                      ("faq", "FAQ"), ("contact", "Contact")]
+                      ("calendar", "Calendar"), ("gallery", "Gallery"), ("resources", "Resources")]
+        if cfg.get("forms"):                                       # the Forms page only exists when forms are listed
+            self.pages.append(("forms", "Forms"))
+        self.pages += [("faq", "FAQ"), ("contact", "Contact")]
         self.footer_pages = self.pages + [("privacy", "Privacy & Safety")]
 
     # --- shared text
@@ -616,6 +618,60 @@ class Site:
   </div>
 </section>"""
         return "Resources", f"Helpful links for {self.name} families.", body, None
+
+    def page_forms(self):
+        """A library of permission, medical and registration forms, each with the date it was last updated."""
+        c = self.cfg
+        style = c["site"].get("date_format", "us")
+        order, groups = [], {}
+        for f in c.get("forms", []):
+            title = (f.get("title") or "").strip()
+            if not title:
+                warnings.append("A form in site.jsonc has no title. Skipped.")
+                continue
+            if f.get("file"):
+                path = ROOT / "assets" / "forms" / f["file"]
+                if not path.exists():
+                    warnings.append(f'Form "{title}": assets/forms/{f["file"]} was not found. Skipped.')
+                    continue
+                href = f'forms/{esc(f["file"])}'
+                rel = ""
+            elif f.get("url") and f["url"].startswith("https://"):
+                href, rel = esc(f["url"]), ' rel="noopener noreferrer"'
+            else:
+                warnings.append(f'Form "{title}" needs a "file" (in assets/forms/) or an https:// "url". Skipped.')
+                continue
+            updated = ""
+            if f.get("updated"):
+                try:
+                    d = dt.date.fromisoformat(f["updated"])
+                    updated = f'<span class="label">Updated {esc(fmt_date(d, style).split(" ", 1)[1] if style == "intl" else fmt_date(d, style).split(", ", 1)[1])}</span>'
+                    if (self.today - d).days > 365:
+                        warnings.append(f'Form "{title}" was last updated {f["updated"]}. Check it is still current, then update the date.')
+                except ValueError:
+                    warnings.append(f'Form "{title}" has a bad date "{f["updated"]}" (use YYYY-MM-DD).')
+            else:
+                warnings.append(f'Form "{title}" has no "updated" date; families like to know it is current.')
+            kind = (f.get("category") or "Forms").strip()
+            if kind not in groups:
+                order.append(kind)
+                groups[kind] = []
+            groups[kind].append(f'\n  <div class="card">{updated}<h3>{esc(title)}</h3><p>{esc(f.get("text", ""))}</p>'
+                                f'<p><a href="{href}"{rel}>{esc(f.get("label") or "Download")}</a></p></div>')
+        sections = "".join(
+            f"""
+<section class="section{' section-alt' if i % 2 else ''}">
+  <div class="wrap">
+    <h2>{esc(k)}</h2>
+    <div class="cards cards-3">{"".join(groups[k])}
+    </div>
+  </div>
+</section>""" for i, k in enumerate(order))
+        if not sections:
+            sections = '\n<section class="section"><div class="wrap"><p class="muted center">No forms posted yet.</p></div></section>'
+        body = f"""{self.page_head("Forms", "Download the forms you need. Ask a leader if you're not sure which one applies.")}
+{sections}"""
+        return "Forms", f"Forms for {self.name}: permission, medical, and registration.", body, None
 
     def page_faq(self):
         c = self.cfg

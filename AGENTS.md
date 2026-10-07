@@ -59,6 +59,8 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
   - No `http://` links.
   - No trackers, analytics, or third-party scripts unless the user asks. If they do, update the
     CSP in `Site.csp()` in `build.py` and the Privacy page text.
+- **Forms:** only blank forms go in `assets/forms/`. Never add a filled-in form, and don't invent a form or its
+  link; use what the user gives you. Set `updated` to the date the user last checked it.
 - **Trademarks:** don't add official logos, badges, or insignia of Scouting America or Girl Scouts
   of the USA unless the user supplies them and confirms they may use them.
 - **Consistency:** every page shares one header and footer (built by `Site.layout` and
