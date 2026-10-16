@@ -261,7 +261,7 @@ class Site:
 
     def layout(self, slug, title, description, body, jsonld=None, robots="index, follow"):
         root = self.base_path if slug == "404" else ""
-        page_title = self.name if slug == "index" else f"{title} — {self.name}"
+        page_title = self.title_suffix() if slug == "index" else f"{title} — {self.title_suffix()}"
         head_urls = []
         if self.base_url:
             if slug != "404":
@@ -339,8 +339,32 @@ class Site:
             return ""
         return f'\n<section class="section section-extra">\n  <div class="wrap">\n{f.read_text(encoding="utf-8")}\n  </div>\n</section>'
 
+    def llms_txt(self, pages):
+        """A plain-text summary for AI assistants and answer engines (https://llmstxt.org/)."""
+        c, g, m = self.cfg, self.group, self.cfg["meetings"]
+        lines = [f"# {self.name}", "", f"> {g.get('description') or self.who()}", ""]
+        facts = [("Location", self.place()), ("Who can join", g.get("serves", "")),
+                 ("Meetings", ", ".join(x for x in (m.get("summary"), m.get("location")) if x)),
+                 ("Cost", (c.get("cost") or {}).get("summary", "")), ("Email", c["contact"].get("email", ""))]
+        council = c.get("council") or {}
+        if council.get("name"):
+            facts.append(("Council", f"{council['name']} ({council['url']})" if council.get("url") else council["name"]))
+        lines += [f"- {k}: {v}" for k, v in facts if v] + ["", "## Pages", ""]
+        for slug, title, desc in pages:
+            lines.append(f"- [{title}]({self.url(slug) or ('./' if slug == 'index' else slug + '.html')}): {desc}")
+        return "\n".join(lines) + "\n"
+
     def place(self):
         return ", ".join(x for x in (self.group.get("city"), self.group.get("region")) if x)
+
+    def who(self):
+        """The group's name with its town, for page descriptions: what people type into a search box."""
+        return f"{self.name} in {self.place()}" if self.place() else self.name
+
+    def title_suffix(self):
+        """'Girl Scout Troop 80301, Dumfries VA': the town in every title helps local searches."""
+        town = " ".join(x for x in (self.group.get("city"), self.group.get("region")) if x)
+        return f"{self.name}, {town}" if town else self.name
 
     def page_head(self, title, lede):
         return f"""<section class="page-head">
@@ -428,8 +452,20 @@ class Site:
   </div>
 </section>"""
         org = {"@context": "https://schema.org", "@type": "Organization", "name": self.name,
-               "description": g.get("description", ""), "email": c["contact"]["email"],
+               "description": g.get("description", ""),
                "address": {"@type": "PostalAddress", "addressLocality": g.get("city", ""), "addressRegion": g.get("region", "")}}
+        if c["contact"].get("email"):
+            org["email"] = c["contact"]["email"]
+        if self.place():
+            org["areaServed"] = self.place()
+        council = c.get("council") or {}
+        if council.get("name"):
+            org["parentOrganization"] = {"@type": "Organization", "name": council["name"]}
+            if council.get("url"):
+                org["parentOrganization"]["url"] = council["url"]
+        same_as = [s["url"] for s in c["contact"].get("social", []) if s.get("url")]
+        if same_as:
+            org["sameAs"] = same_as
         if self.base_url:
             org["url"] = self.base_url
             org["logo"] = self.base_url + "apple-touch-icon.png"
@@ -484,7 +520,7 @@ class Site:
     <p><a href="privacy.html">Our privacy and photo policy</a></p>
   </div>
 </section>"""
-        return "About", f"About {self.name}: who we are, what we do, and who leads us.", body, None
+        return "About", f"About {self.who()}: who we are, what we do, and who leads us.", body, None
 
     def youth_protection(self):
         """A short "Youth Protection" section for the Join page, when youth_protection.show is true."""
@@ -546,7 +582,7 @@ class Site:
     <p class="center"><a class="btn btn-primary" href="contact.html">Questions? Contact Us</a></p>
   </div>
 </section>"""
-        return "Join", f"How to join {self.name}: who can join, steps, cost, and what to wear.", body, None
+        return "Join", f"How to join {self.who()}: who can join, steps, cost, and what to wear.", body, None
 
     def page_groups(self):
         c, t = self.cfg, self.terms
@@ -562,7 +598,7 @@ class Site:
   </div>
 </section>"""
         names = ", ".join(gp["name"] for gp in c["groups"])
-        return t["groups"], f"{self.name} {t['groups'].lower()}: {names}.", body, None
+        return t["groups"], f"{t['groups']} at {self.who()}: {names}.", body, None
 
     def page_calendar(self):
         c = self.cfg
@@ -588,7 +624,7 @@ class Site:
     {frame}
   </div>
 </section>"""
-        return "Calendar", f"{self.name} calendar: {mtgs} and upcoming events.", body, None
+        return "Calendar", f"Calendar for {self.who()}: {mtgs} and upcoming events.", body, None
 
     def page_gallery(self):
         c = self.cfg
@@ -626,7 +662,7 @@ class Site:
     <p class="muted center">Have photos to share? {("Send them to " + self.mail() + ".") if self.email() else "Give them to a leader at a meeting."} We only post photos of kids with a parent's written permission.</p>
   </div>
 </section>"""
-        return "Gallery", f"Photos from {self.name} {mtgs} and events.", body, None
+        return "Gallery", f"Photos from {self.who()}: {mtgs} and events.", body, None
 
     def page_resources(self):
         c = self.cfg
@@ -654,7 +690,7 @@ class Site:
     </div>
   </div>
 </section>"""
-        return "Resources", f"Helpful links for {self.name} families.", body, None
+        return "Resources", f"Helpful links for families of {self.who()}.", body, None
 
     def page_forms(self):
         """A library of permission, medical and registration forms, each with the date it was last updated."""
@@ -708,7 +744,7 @@ class Site:
             sections = '\n<section class="section"><div class="wrap"><p class="muted center">No forms posted yet.</p></div></section>'
         body = f"""{self.page_head("Forms", "Download the forms you need. Ask a leader if you're not sure which one applies.")}
 {sections}"""
-        return "Forms", f"Forms for {self.name}: permission, medical, and registration.", body, None
+        return "Forms", f"Forms for {self.who()}: permission, medical, and registration.", body, None
 
     def page_faq(self):
         c = self.cfg
@@ -724,7 +760,7 @@ class Site:
     </div>
   </div>
 </section>"""
-        return "FAQ", f"{self.name} FAQ: who can join, {self.terms.get('meetings', 'meetings')}, cost, and more.", body, ld
+        return "FAQ", f"Questions about {self.who()}: who can join, {self.terms.get('meetings', 'meetings')}, cost, and more.", body, ld
 
     def page_contact(self):
         c = self.cfg
@@ -747,7 +783,7 @@ class Site:
     </div>
   </div>
 </section>"""
-        return "Contact", f"Contact {self.name}: email, {self.terms.get('meeting', 'meeting')} time, and place.", body, None
+        return "Contact", f"Contact {self.who()}: email, {self.terms.get('meeting', 'meeting')} time, and place.", body, None
 
     def page_privacy(self):
         c = self.cfg
@@ -769,7 +805,7 @@ class Site:
     <p>Want a photo taken down? {("Email " + self.mail()) if self.email() else "Tell a leader at a meeting"} and we'll remove it promptly.</p>
   </div>
 </section>"""
-        return "Privacy & Safety", f"How {self.name} handles your information and keeps kids safe.", body, None
+        return "Privacy & Safety", f"How {self.who()} handles your information and keeps kids safe.", body, None
 
     def page_404(self):
         root = self.base_path
@@ -838,10 +874,14 @@ class Site:
             "theme_color": self.theme["primary"],
             "icons": [{"src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png"},
                       {"src": "emblem.svg", "sizes": "any", "type": "image/svg+xml"}]}, indent=2))
+        summaries = []
         for slug, _ in self.footer_pages + [("404", "")]:
             title, desc, body, ld = getattr(self, f"page_{slug}")()
             robots = "noindex, follow" if slug == "404" or getattr(self, "noindex", False) else "index, follow"
             (OUT / f"{slug}.html").write_text(self.layout(slug, title, desc, body, ld, robots), encoding="utf-8")
+            if slug != "404":
+                summaries.append((slug, title, desc))
+        (OUT / "llms.txt").write_text(self.llms_txt(summaries), encoding="utf-8")
         robots = "User-agent: *\nAllow: /\n"
         if self.base_url:
             robots += f"\nSitemap: {self.base_url}sitemap.xml\n"
