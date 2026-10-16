@@ -156,10 +156,13 @@ if it isn't true for your group. Say only what your group actually does.
 2. **Never name kids** in captions or alt text ("Scouts on a hike", not names). The check fails when a page
    seems to name a child in full ("Emma Johnson"). Leaders are exempt; list any other adult who agreed to
    be named under `photos.allowed_names`. It is a guard against slips, so read your captions too.
-3. **Resize and clean photos** before uploading: about 1200 pixels wide and under 500 KB. Strip the
+3. **Blur every child's face**, even with permission. Use the blur or pixelate tool in your phone's photo
+   editor or any free photo editor, then zoom in and check: small faces in the background and kids looking
+   down are easy to miss. Photos with no faces, like finished crafts, don't need it.
+4. **Resize and clean photos** before uploading: about 1200 pixels wide and under 500 KB. Strip the
    location data. On most phones, turn off location in the share options, or use a free tool such
    as [Squoosh](https://squoosh.app) in your browser.
-4. Upload to `assets/images/gallery/` (**Add file → Upload files** on GitHub), then list each one in `site.jsonc`:
+5. Upload to `assets/images/gallery/` (**Add file → Upload files** on GitHub), then list each one in `site.jsonc`:
 
    ```jsonc
    "gallery": [
