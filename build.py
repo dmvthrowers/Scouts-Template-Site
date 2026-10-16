@@ -659,7 +659,7 @@ class Site:
 <section class="section">
   <div class="wrap">
     {grid}
-    <p class="muted center">Have photos to share? {("Send them to " + self.mail() + ".") if self.email() else "Give them to a leader at a meeting."} We only post photos of kids with a parent's written permission.</p>
+    <p class="muted center">Have photos to share? {("Send them to " + self.mail() + ".") if self.email() else "Give them to a leader at a meeting."} We only post photos of kids with a parent's written permission, and we blur every child's face.</p>
   </div>
 </section>"""
         return "Gallery", f"Photos from {self.who()}: {mtgs} and events.", body, None
@@ -801,8 +801,8 @@ class Site:
     <p>We use your name, email, and anything you share only to answer you and run our activities. We never sell or share it.</p>
     <h2 id="safety">{esc(c["safety"]["title"])}</h2>
     <ul>{"".join(f"<li>{esc(p)}</li>" for p in c["safety"]["points"])}</ul>
-    <h2>Photo Removal</h2>
-    <p>Want a photo taken down? {("Email " + self.mail()) if self.email() else "Tell a leader at a meeting"} and we'll remove it promptly.</p>
+    <h2>Photos</h2>
+    <p>We blur every child's face in the photos we post. Want a photo taken down? {("Email " + self.mail()) if self.email() else "Tell a leader at a meeting"} and we'll remove it promptly.</p>
   </div>
 </section>"""
         return "Privacy & Safety", f"How {self.who()} handles your information and keeps kids safe.", body, None
