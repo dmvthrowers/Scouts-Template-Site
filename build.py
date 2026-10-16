@@ -23,6 +23,7 @@ import os
 import re
 import shutil
 import struct
+import subprocess
 import sys
 import zlib
 from pathlib import Path
@@ -275,7 +276,9 @@ class Site:
             ld.append({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": self.url("index")},
                 {"@type": "ListItem", "position": 2, "name": title, "item": self.url(slug)}]})
-        if jsonld:
+        if isinstance(jsonld, list):
+            ld.extend(jsonld)
+        elif jsonld:
             ld.append(jsonld)
         ld_html = ""
         if ld:
@@ -394,6 +397,52 @@ class Site:
         items = sorted(upcoming, key=lambda x: x[0]) + tbd
         return items[:limit] if limit else items
 
+    def events_ld(self):
+        """Event JSON-LD for dated upcoming events, so search engines and AI answers can list them.
+        Past events drop off at each build, the same as on the page."""
+        out = []
+        for d, e in self.events():
+            if not d:
+                continue
+            ev = {"@context": "https://schema.org", "@type": "Event", "name": e["title"], "startDate": d.isoformat(),
+                  "eventStatus": "https://schema.org/EventScheduled",
+                  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                  "organizer": {"@type": "Organization", "name": self.name}}
+            if self.base_url:
+                ev["organizer"]["url"] = self.base_url
+                ev["image"] = [self.base_url + "og-card.png"]
+            if e.get("details"):
+                ev["description"] = e["details"]
+            if self.place():
+                ev["location"] = {"@type": "Place", "name": self.place(), "address": {
+                    "@type": "PostalAddress", "addressLocality": self.group.get("city", ""),
+                    "addressRegion": self.group.get("region", "")}}
+            out.append(ev)
+        return out
+
+    def last_changed(self, slug):
+        """Date for a page's sitemap <lastmod>: the last commit, or for pages that list events,
+        the day a past event dropped off if that is later. Not the build date: weekly rebuilds
+        would otherwise mark every page as changed each Monday, and search engines then
+        ignore lastmod altogether."""
+        if not hasattr(self, "_commit_date"):
+            try:
+                out = subprocess.run(["git", "log", "-1", "--format=%cs"], cwd=ROOT, capture_output=True,
+                                     text=True, timeout=10).stdout.strip()
+                self._commit_date = dt.date.fromisoformat(out)
+            except (OSError, ValueError, subprocess.SubprocessError):
+                self._commit_date = self.today                     # not a git checkout
+        when = self._commit_date
+        if slug in ("index", "calendar"):
+            for e in self.cfg.get("events", []):
+                try:
+                    d = dt.date.fromisoformat(e.get("date") or "")
+                except ValueError:
+                    continue
+                if when < d < self.today:                          # the day after it passed, it left the page
+                    when = d + dt.timedelta(days=1)
+        return min(when, self.today)
+
     def event_list(self, limit=None):
         items = self.events(limit)
         if not items:
@@ -471,7 +520,8 @@ class Site:
             org["logo"] = self.base_url + "apple-touch-icon.png"
         if g.get("founded"):
             org["foundingDate"] = g["founded"]
-        return "Home", g.get("description", ""), body, org
+        events = self.events_ld()
+        return "Home", g.get("description", ""), body, [org] + events if events else org
 
     def page_about(self):
         c, g, t = self.cfg, self.group, self.terms
@@ -885,7 +935,7 @@ class Site:
         robots = "User-agent: *\nAllow: /\n"
         if self.base_url:
             robots += f"\nSitemap: {self.base_url}sitemap.xml\n"
-            urls = "".join(f"  <url><loc>{esc(self.url(s))}</loc><lastmod>{self.today.isoformat()}</lastmod></url>\n"
+            urls = "".join(f"  <url><loc>{esc(self.url(s))}</loc><lastmod>{self.last_changed(s).isoformat()}</lastmod></url>\n"
                            for s, _ in self.footer_pages)
             (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n")
