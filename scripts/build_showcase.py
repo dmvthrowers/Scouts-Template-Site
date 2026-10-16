@@ -40,6 +40,43 @@ if base_url:
                                      f"  <url><loc>{base_url}</loc></url>\n</urlset>\n")
 (OUT / "robots.txt").write_text(robots)
 
+# GitHub Pages serves the root 404.html for any missing page, at any depth, so its links are
+# absolute to the site's base path. Without it, visitors get GitHub's generic error page.
+root = urlparse(base_url).path if base_url else "/"
+(OUT / "404.html").write_text(f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Not Found — Youth Group Site Template</title>
+  <meta name="description" content="That page doesn't exist. See the free website template for Scout units and kids clubs.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#0b3d6e">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'; frame-src 'none'; connect-src 'none'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+  <link rel="icon" href="{root}favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="{root}showcase.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="{root}"><img src="{root}favicon.svg" alt="" width="36" height="36"><span>Youth Group Site Template</span></a>
+  </div>
+</header>
+<main id="main-content">
+<section class="hero">
+  <div class="wrap">
+    <h1>Page Not Found</h1>
+    <p class="lede">That page doesn't exist. It may have moved, or the example site it belonged to was renamed.</p>
+    <p><a class="btn btn-accent" href="{root}">See the template and live examples</a></p>
+  </div>
+</section>
+</main>
+</body>
+</html>
+""", encoding="utf-8")
+
 for name, config in EXAMPLES:
     url = f"{base_url}examples/{name}/" if base_url else ""
     out = f"_site/examples/{name}"
