@@ -624,13 +624,14 @@ class Site:
         c, t, m = self.cfg, self.terms, self.cfg["meetings"]
         meeting = t.get("meeting") or (t.get("meetings") or "meetings").rstrip("s")   # "practice" for sports
         items = c.get("first_visit") or [
-            {"title": "When and Where", "text": "{meetings} at {location}."},
+            {"title": "When and Where", "text": "When: {meetings}. Where: {location}."},
             {"title": "What Happens", "text": f"A {meeting} runs about an hour, with a hands-on activity your child can jump right into. No experience needed."},
             {"title": "What to Wear and Bring", "text": "Comfortable clothes your child can move around in. No uniform is needed to visit, and there is nothing to buy."},
             {"title": "Who Comes", "text": "Your child and a parent or guardian. Visiting is free; bring your questions for the leaders."},
         ]
         maps = ""
-        if m.get("location"):
+        town = {x.lower().replace(",", "") for x in (self.group.get("city", ""), self.place(), self.title_suffix().split(", ", 1)[-1])}
+        if m.get("location") and m["location"].lower().replace(",", "") not in town:   # a map of just the town helps nobody
             q = "+".join(m["location"].replace(",", " ").split())
             maps = f' {ext_link("https://www.google.com/maps/search/?api=1&query=" + q, "Open in Google Maps")}.'
         cards = "".join(
