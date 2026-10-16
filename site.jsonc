@@ -146,6 +146,10 @@
   // { "title": "Our Sign-up Form", "text": "Register for events.", "url": "https://...", "label": "Sign up" }
   "links": [],
 
+  // "Your First Visit" cards on the Join page. Leave out to use the defaults (when and where,
+  // what happens, what to wear, who comes). {meetings} and {location} fill in from above.
+  // "first_visit": [ { "title": "What Happens", "text": "We open with the pledge, then..." } ],
+
   // Extra FAQ entries (added after the preset's FAQ)
   // { "q": "Question?", "a": "Answer." }
   "faq_extra": [],

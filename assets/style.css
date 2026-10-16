@@ -75,6 +75,16 @@ a:hover { color: var(--primary-dark); }
 .btn-primary { background: var(--primary); color: var(--white); }
 .btn-primary:hover { background: var(--primary-dark); color: var(--white); }
 
+/* ---------- Start-here buttons under the home hero ---------- */
+.quick-links { background: var(--primary-dark); padding: 1.25rem 0; }
+.quick-links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.quick-links a { display: flex; flex-direction: column; justify-content: center; gap: .25rem; min-height: 5.5rem; height: 100%;
+  padding: .9rem 1rem; border-radius: var(--radius); background: var(--white); color: var(--primary); text-decoration: none; border: 2px solid transparent; }
+.quick-links a:hover, .quick-links a:focus-visible { border-color: var(--accent); color: var(--primary); }
+.quick-links strong { font-size: 1.05rem; line-height: 1.2; }
+.quick-links span { font-size: .875rem; color: var(--muted); line-height: 1.35; overflow-wrap: anywhere; }
+@media (min-width: 860px) { .quick-links ul { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
 /* ---------- Sections & cards ---------- */
 .section { padding: 3rem 0; }
 .section-alt { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -140,7 +150,7 @@ figcaption { text-align: center; font-size: .9rem; color: var(--muted); margin-t
   h1 { font-size: 2.5rem; }
   .hero h1 { font-size: 3rem; }
   .page-head { min-height: 12.5rem; }
-  .cards-3, .cards-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cards-2, .cards-3, .cards-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

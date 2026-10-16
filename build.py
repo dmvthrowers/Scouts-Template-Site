@@ -457,6 +457,22 @@ class Site:
 
     # ------------------------------------------------------------ pages (one function each)
 
+    def quick_links(self):
+        """One big button per kind of visitor, right under the home hero."""
+        c, t = self.cfg, self.terms
+        links = [("join.html#first-visit", "First Visit", "What to expect and what to bring"),
+                 ("calendar.html", f"{t.get('meetings', 'Meetings').title()} & Location", c["meetings"]["summary"]),
+                 ("join.html", "Join & Cost", c["cost"]["summary"]),
+                 ("forms.html", "Forms", "Permission, medical and registration forms") if c.get("forms") else
+                 ("faq.html", "Questions", "Answers for new families")]
+        items = "".join(f'\n      <li><a href="{h}"><strong>{esc(a)}</strong><span>{esc(b)}</span></a></li>' for h, a, b in links)
+        return f"""<nav class="quick-links" aria-label="Start here">
+  <div class="wrap">
+    <ul>{items}
+    </ul>
+  </div>
+</nav>"""
+
     def page_index(self):
         c, g, t = self.cfg, self.group, self.terms
         glance = [("When", c["meetings"]["summary"]), ("Where", c["meetings"]["location"]),
@@ -474,10 +490,11 @@ class Site:
     <p class="lede">{esc(g.get("description", ""))}</p>
     <div class="btn-row">
       <a class="btn btn-accent" href="join.html">Join the {esc(t["unit"])}</a>
-      <a class="btn btn-ghost" href="contact.html">{esc(t.get("visit", "Visit a Meeting"))}</a>
+      <a class="btn btn-ghost" href="join.html#first-visit">{esc(t.get("visit", "Visit a Meeting"))}</a>
     </div>
   </div>
 </section>
+{self.quick_links()}
 
 <section class="section">
   <div class="wrap">
@@ -601,6 +618,36 @@ class Site:
 </section>
 """
 
+    def first_visit(self):
+        """'Your First Visit' cards for new families: when and where (with a map link), what happens,
+        what to wear, who comes. site.jsonc "first_visit" (a list of {title, text}) replaces the defaults."""
+        c, t, m = self.cfg, self.terms, self.cfg["meetings"]
+        meeting = t.get("meeting") or (t.get("meetings") or "meetings").rstrip("s")   # "practice" for sports
+        items = c.get("first_visit") or [
+            {"title": "When and Where", "text": "When: {meetings}. Where: {location}."},
+            {"title": "What Happens", "text": f"A {meeting} runs about an hour, with a hands-on activity your child can jump right into. No experience needed."},
+            {"title": "What to Wear and Bring", "text": "Comfortable clothes your child can move around in. No uniform is needed to visit, and there is nothing to buy."},
+            {"title": "Who Comes", "text": "Your child and a parent or guardian. Visiting is free; bring your questions for the leaders."},
+        ]
+        maps = ""
+        town = {x.lower().replace(",", "") for x in (self.group.get("city", ""), self.place(), self.title_suffix().split(", ", 1)[-1])}
+        if m.get("location") and m["location"].lower().replace(",", "") not in town:   # a map of just the town helps nobody
+            q = "+".join(m["location"].replace(",", " ").split())
+            maps = f' {ext_link("https://www.google.com/maps/search/?api=1&query=" + q, "Open in Google Maps")}.'
+        cards = "".join(
+            f'\n      <div class="card"><h3>{esc(i["title"])}</h3><p>{esc(self.fill(i["text"]))}'
+            + (maps if n == 0 and not c.get("first_visit") else "") + "</p></div>"
+            for n, i in enumerate(items))
+        ahead = f' Planning to come? Let us know at {self.mail()} so we can say hello.' if self.email() else ""
+        return f"""<section class="section" id="first-visit">
+  <div class="wrap">
+    <h2 class="center">Your First Visit</h2>
+    <p class="center muted">Come see for yourself before you sign up.{ahead}</p>
+    <div class="cards cards-2">{cards}
+    </div>
+  </div>
+</section>"""
+
     def page_join(self):
         c, t = self.cfg, self.terms
         steps = "".join(f'\n  <li class="step"><h3>{esc(s["title"])}</h3><p>{esc(self.fill(s["text"]))}</p></li>'
@@ -613,7 +660,8 @@ class Site:
         serves = f' {esc(self.group["serves"])}' if self.group.get("serves") else ""
         body = f"""{self.page_head(f"Join the {t['unit']}", f"Open to kids {c['program']['ages']}. {c['program']['welcome']}.")}
 
-<section class="section">
+{self.first_visit()}
+<section class="section section-alt">
   <div class="wrap">
     <h2 class="center">How to Join</h2>
     <ol class="steps">{steps}
@@ -622,7 +670,7 @@ class Site:
   </div>
 </section>
 {self.youth_protection()}
-<section class="section section-alt">
+<section class="section">
   <div class="wrap">
     <div class="cards cards-3">
       <div class="card"><h3>Who Can Join</h3><p>Kids {esc(c["program"]["ages"])}. {esc(c["program"]["welcome"])}.{serves}</p></div>
@@ -632,7 +680,7 @@ class Site:
     <p class="center"><a class="btn btn-primary" href="contact.html">Questions? Contact Us</a></p>
   </div>
 </section>"""
-        return "Join", f"How to join {self.who()}: who can join, steps, cost, and what to wear.", body, None
+        return "Join", f"How to join {self.who()}: what to expect at your first visit, who can join, steps, cost, and what to wear.", body, None
 
     def page_groups(self):
         c, t = self.cfg, self.terms
