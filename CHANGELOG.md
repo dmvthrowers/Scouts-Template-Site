@@ -4,7 +4,9 @@ What changed in each release of this template. Newest first. Copies of the templ
 
 ## Unreleased
 
-Nothing yet. Changes that merge after 1.0.0 are listed here until the next tag.
+Changes that merge after 1.0.0 are listed here until the next tag.
+
+- Search and AI findability: every page title and description now names the town ("About — Troop 123, Springfield VA"), so local searches match. The home page's Organization data drops an empty email and adds the area served, the council as parent organization, and social links. The build also writes `llms.txt`, a plain-text summary of the group and its pages for AI assistants.
 
 ## 1.0.0
 
