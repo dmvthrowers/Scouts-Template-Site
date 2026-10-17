@@ -117,6 +117,13 @@ def fmt_date(d, style):
     return f"{DAYS[d.weekday()]}, {MONTHS[d.month - 1]} {d.day}, {d.year}"
 
 
+def fmt_time(hhmm, style):
+    h, m = int(hhmm[:2]), int(hhmm[3:5])
+    if style == "intl":
+        return f"{h:02d}:{m:02d}"
+    return f"{(h % 12) or 12}:{m:02d} {'AM' if h < 12 else 'PM'}"
+
+
 def image_size(path):
     """Width/height of PNG, GIF, JPEG, or WebP files without any libraries."""
     data = path.read_bytes()
@@ -185,6 +192,7 @@ class Site:
         self.name = self.group["name"]
         self.today = dt.date.today()
         self.has_calendar = bool(cfg.get("calendar", {}).get("embed_url"))
+        self.synced = self.load_synced_events()
         groups_label = self.terms.get("groups", "Groups")
         self.pages = [("index", "Home"), ("about", "About"), ("join", "Join"), ("groups", groups_label),
                       ("calendar", "Calendar"), ("gallery", "Gallery"), ("resources", "Resources")]
@@ -382,21 +390,54 @@ class Site:
         return f'<div class="{cls}">' + "".join(
             f'\n  <div class="card"><h3>{esc(i["title"])}</h3><p>{esc(i["text"])}</p></div>' for i in items) + "\n</div>"
 
+    def load_synced_events(self):
+        """Events that scripts/sync_calendar.py pulled from the group's Google Calendar (events.generated.json).
+        Absent unless the deploy workflow has a calendar address; then the site uses the events in site.jsonc alone.
+        The calendar's place is shown only when "calendar.show_places" is true (a home address stays off the site)."""
+        path = ROOT / "events.generated.json"
+        if not path.exists():
+            return []
+        try:
+            items = json.loads(path.read_text(encoding="utf-8")).get("events", [])
+        except (OSError, ValueError, AttributeError):
+            warnings.append("events.generated.json could not be read, so calendar events were skipped.")
+            return []
+        show = bool(self.cfg.get("calendar", {}).get("show_places"))
+        return [{k: v for k, v in e.items() if show or k != "place"} for e in items if isinstance(e, dict) and e.get("title") and e.get("date")]
+
     def events(self, limit=None):
         upcoming, tbd = [], []
-        for e in self.cfg.get("events", []):
+        mine = self.cfg.get("events", [])
+        taken = {e.get("date") for e in mine if e.get("date")}
+        for e in mine + [x for x in self.synced if x["date"] not in taken]:    # an event in site.jsonc replaces the calendar's that day
             if not e.get("date"):
                 tbd.append((None, e))
                 continue
             try:
                 d = dt.date.fromisoformat(e["date"])
+                last = dt.date.fromisoformat(e["end_date"]) if e.get("end_date") else d
             except ValueError:
                 warnings.append(f'Event "{e.get("title")}" has a bad date "{e["date"]}" (use YYYY-MM-DD). Skipped.')
                 continue
-            if d >= self.today:
+            if last >= self.today:
                 upcoming.append((d, e))
-        items = sorted(upcoming, key=lambda x: x[0]) + tbd
+        items = sorted(upcoming, key=lambda x: (x[0], x[1].get("start", ""))) + tbd
         return items[:limit] if limit else items
+
+    def when_text(self, d, e):
+        """"Thu, Nov 5, 2026 · 6:30 PM – 8:00 PM", or a date range for a multi-day event."""
+        style = self.cfg["site"].get("date_format", "us")
+        if not d:
+            return "Date to be announced"
+        text = fmt_date(d, style)
+        if e.get("end_date"):
+            try:
+                text += " – " + fmt_date(dt.date.fromisoformat(e["end_date"]), style)
+            except ValueError:
+                pass
+        if e.get("start"):
+            text += " · " + fmt_time(e["start"], style) + (" – " + fmt_time(e["end"], style) if e.get("end") and not e.get("end_date") else "")
+        return text
 
     def events_ld(self):
         """Event JSON-LD for dated upcoming events, so search engines and AI answers can list them.
@@ -405,16 +446,21 @@ class Site:
         for d, e in self.events():
             if not d:
                 continue
-            ev = {"@context": "https://schema.org", "@type": "Event", "name": e["title"], "startDate": d.isoformat(),
+            ev = {"@context": "https://schema.org", "@type": "Event", "name": e["title"],
+                  "startDate": d.isoformat() + (f"T{e['start']}" if e.get("start") else ""),
                   "eventStatus": "https://schema.org/EventScheduled",
                   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
                   "organizer": {"@type": "Organization", "name": self.name}}
             if self.base_url:
                 ev["organizer"]["url"] = self.base_url
                 ev["image"] = [self.base_url + "og-card.png"]
+            if e.get("end_date") or e.get("end"):
+                ev["endDate"] = (e.get("end_date") or d.isoformat()) + (f"T{e['end']}" if e.get("end") and not e.get("end_date") else "")
             if e.get("details"):
                 ev["description"] = e["details"]
-            if self.place():
+            if e.get("place"):
+                ev["location"] = {"@type": "Place", "name": e["place"]}
+            elif self.place():
                 ev["location"] = {"@type": "Place", "name": self.place(), "address": {
                     "@type": "PostalAddress", "addressLocality": self.group.get("city", ""),
                     "addressRegion": self.group.get("region", "")}}
@@ -435,9 +481,9 @@ class Site:
                 self._commit_date = self.today                     # not a git checkout
         when = self._commit_date
         if slug in ("index", "calendar"):
-            for e in self.cfg.get("events", []):
+            for e in self.cfg.get("events", []) + self.synced:
                 try:
-                    d = dt.date.fromisoformat(e.get("date") or "")
+                    d = dt.date.fromisoformat(e.get("end_date") or e.get("date") or "")
                 except ValueError:
                     continue
                 if when < d < self.today:                          # the day after it passed, it left the page
@@ -446,7 +492,8 @@ class Site:
 
     def events_ics(self):
         """The dated upcoming events as an iCalendar (.ics) file, or "" when there are none. Events are all-day,
-        because the settings hold only a date and free text; tell families to check details with the leaders."""
+        unless an event has a start time (from the Google Calendar sync or "start" in site.jsonc), which is written as local
+        time. Tell families to check details with the leaders."""
         dated = [(d, e) for d, e in self.events() if d]
         if not dated:
             return ""
@@ -468,9 +515,20 @@ class Site:
                  "CALSCALE:GREGORIAN", "METHOD:PUBLISH", f"X-WR-CALNAME:{text(self.name)}"]
         for d, e in dated:
             slug = re.sub(r"[^a-z0-9]+", "-", e["title"].lower()).strip("-") or "event"
-            lines += ["BEGIN:VEVENT", f"UID:{d:%Y%m%d}-{slug}@{host}", f"DTSTAMP:{stamp}",
-                      f"DTSTART;VALUE=DATE:{d:%Y%m%d}", f"DTEND;VALUE=DATE:{d + dt.timedelta(days=1):%Y%m%d}",
-                      f"SUMMARY:{text(e['title'])}"]
+            try:
+                last = dt.date.fromisoformat(e["end_date"]) if e.get("end_date") else d
+            except ValueError:
+                last = d
+            uid = f"{d:%Y%m%d}{(e.get('start') or '').replace(':', '')}-{slug}@{host}"
+            if e.get("start"):                                       # a time of day: written as local ("floating") time
+                begin = f"DTSTART:{d:%Y%m%d}T{e['start'].replace(':', '')}00"
+                finish = f"DTEND:{(last if e.get('end') else d):%Y%m%d}T{(e.get('end') or e['start']).replace(':', '')}00" if e.get("end") else ""
+            else:
+                begin = f"DTSTART;VALUE=DATE:{d:%Y%m%d}"
+                finish = f"DTEND;VALUE=DATE:{last + dt.timedelta(days=1):%Y%m%d}"
+            lines += ["BEGIN:VEVENT", f"UID:{uid}", f"DTSTAMP:{stamp}", begin] + ([finish] if finish else []) + [f"SUMMARY:{text(e['title'])}"]
+            if e.get("place"):
+                lines.append(f"LOCATION:{text(e['place'])}")
             if e.get("details"):
                 lines.append(f"DESCRIPTION:{text(e['details'])}")
             lines.append("END:VEVENT")
@@ -481,12 +539,12 @@ class Site:
         items = self.events(limit)
         if not items:
             return '<p class="muted">No upcoming events posted yet. Check back soon!</p>'
-        style = self.cfg["site"].get("date_format", "us")
         rows = []
         for d, e in items:
-            when = fmt_date(d, style) if d else "Date to be announced"
+            when = self.when_text(d, e)
+            where = f' <span class="event-place">at {esc(e["place"])}</span>' if e.get("place") else ""
             details = f'<p>{esc(e["details"])}</p>' if e.get("details") else ""
-            rows.append(f'<li><span class="event-date">{esc(when)}</span><strong>{esc(e["title"])}</strong>{details}</li>')
+            rows.append(f'<li><span class="event-date">{esc(when)}</span><strong>{esc(e["title"])}</strong>{where}{details}</li>')
         return '<ul class="event-list">\n' + "\n".join(rows) + "\n</ul>"
 
     # ------------------------------------------------------------ pages (one function each)

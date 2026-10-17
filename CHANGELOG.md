@@ -6,6 +6,8 @@ What changed in each release of this template. Newest first. Copies of the templ
 
 Changes that merge after 1.0.0 are listed here until the next tag.
 
+- Events from Google Calendar (optional): with a `CALENDAR_ICS_URL` repository secret, the deploy workflow pulls upcoming events from the group's Google Calendar every morning (repeating events included) and lists them with times on the Calendar and home pages, in `calendar.ics`, and in the Event data for search engines. Only title, date, time and place are taken; descriptions stay private unless they start with `Public:`. The workflow now rebuilds daily instead of weekly. See the README.
+
 - Calendar: the Google Calendar frame now loads only after a visitor clicks **Show the Calendar**, so no page contacts Google until asked (without JavaScript, an "Open in Google Calendar" link still works). Added an **Add it to your Google Calendar** link, and a downloadable `calendar.ics` of your dated upcoming events, built from `events`.
 - HTML validation: the deploy workflow runs the W3C Nu HTML Checker (errors only) on every built page, so invalid markup never goes live.
 - New families: the home page has four start-here buttons under the hero (First Visit, Meetings & Location, Join & Cost, and Forms or Questions). The Join page opens with "Your First Visit": when and where with a map link, what happens, what to wear, and who comes. Override the cards with `first_visit` in `site.jsonc`.

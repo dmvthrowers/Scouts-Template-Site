@@ -6,7 +6,7 @@ A troop, pack or club site made with **Use this template** is its own repository
 
 | Yours (keep these) | The template's (these are what an update replaces) |
 | --- | --- |
-| site.jsonc, content/, assets/images/, DEPLOY.md (once filled in) | build.py, scripts/check_site.py, assets/style.css, assets/site.js, presets/, vercel.json, .github/workflows/deploy.yml |
+| site.jsonc, content/, assets/images/, DEPLOY.md (once filled in) | build.py, scripts/check_site.py, scripts/sync_calendar.py, scripts/test_sync_calendar.py, assets/style.css, assets/site.js, presets/, vercel.json, .github/workflows/deploy.yml |
 
 If you changed one of the template's files on purpose, you'll see your change in the comparison below. Keep it, or move it into your settings if there's a setting for it.
 

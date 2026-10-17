@@ -3,6 +3,7 @@ _site/
 .build-base-path
 .build-privacy.json
 _showcase_test/
+events.generated.json
 
 # OS and editor clutter
 .DS_Store
