@@ -61,7 +61,7 @@
     { "date": "2027-05-14", "title": "Spring Overnight Campout", "details": "May 14–16 at Camp Snyder." }
   ],
 
-  "calendar": { "embed_url": "" },
+  "calendar": { "embed_url": "https://calendar.google.com/calendar/embed?src=fa3adffd31279defe6498a672b5065eadfd8a49e248434efa24b5cd62d8e7af9%40group.calendar.google.com&ctz=America%2FNew_York" },
   "gallery": [],
 
   // Pack 1125's own four pillars replace the preset's.

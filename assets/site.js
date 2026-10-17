@@ -1,4 +1,20 @@
-/* Opens and closes the phone menu. The rest of the site works without JavaScript. */
+/* Opens and closes the phone menu, and loads the Google Calendar only when asked. The rest of the site works without JavaScript. */
+(function () {
+  // Calendar page: the Google Calendar frame loads only after a click, so Google is not contacted until then.
+  var gate = document.getElementById("cal-gate");
+  var load = document.getElementById("cal-load");
+  if (gate && load) {
+    load.hidden = false;
+    load.addEventListener("click", function () {
+      var frame = document.createElement("iframe");
+      frame.className = "cal-frame";
+      frame.title = "Calendar";
+      frame.src = gate.getAttribute("data-src");
+      gate.replaceWith(frame);
+      frame.focus();
+    });
+  }
+})();
 (function () {
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("site-nav");

@@ -184,7 +184,13 @@ The **Privacy & Safety** page tells families these rules and how to ask for a ph
    `https://calendar.google.com/calendar/embed?src=`).
 4. Paste it into `site.jsonc` → `"calendar": { "embed_url": "..." }`.
 
-The site's security policy allows only Google Calendar to be embedded, and only when you set this.
+The site's security policy allows only Google Calendar to be embedded, and only when you set this. The calendar
+loads only after a visitor clicks **Show the Calendar**, so no page contacts Google until someone asks. The Calendar
+page also gets an **Add it to your Google Calendar** link (it needs the calendar to be public, like the embed).
+
+**Download-to-calendar file.** Whatever Google Calendar says, the Calendar page also offers **Add these events to
+your calendar (.ics)** whenever you have dated upcoming events in `site.jsonc`. It is built from `events`, as
+all-day events, so there is nothing extra to maintain. Events without a date, and events that have passed, are left out.
 
 ---
 
@@ -330,7 +336,6 @@ None of these are needed to launch. Each is small, free or cheap, and listed rou
   in `build.py`.
 - **Sign-up and permission slips.** Link Google Forms or SignUpGenius from `events[].details`, or
   add them to `links`.
-- **"Subscribe to our calendar" link.** Add your public Google Calendar's iCal link to `links`.
 - **Newsletter.** A free Buttondown or Mailchimp signup link in `links`.
 - **Shared photo albums.** Link a Google Photos or iCloud shared album instead of uploading many photos.
 - **Donations.** Add a Zeffy, PayPal, or Venmo link to `links`. Check your organization's fundraising rules first.

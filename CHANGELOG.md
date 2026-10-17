@@ -6,6 +6,8 @@ What changed in each release of this template. Newest first. Copies of the templ
 
 Changes that merge after 1.0.0 are listed here until the next tag.
 
+- Calendar: the Google Calendar frame now loads only after a visitor clicks **Show the Calendar**, so no page contacts Google until asked (without JavaScript, an "Open in Google Calendar" link still works). Added an **Add it to your Google Calendar** link, and a downloadable `calendar.ics` of your dated upcoming events, built from `events`.
+- HTML validation: the deploy workflow runs the W3C Nu HTML Checker (errors only) on every built page, so invalid markup never goes live.
 - New families: the home page has four start-here buttons under the hero (First Visit, Meetings & Location, Join & Cost, and Forms or Questions). The Join page opens with "Your First Visit": when and where with a map link, what happens, what to wear, and who comes. Override the cards with `first_visit` in `site.jsonc`.
 - Events in search: the home page now lists each dated upcoming event as `Event` data for Google and AI answers (name, date, details, town). Past events drop off at each build, the same as on the page.
 - Sitemap dates: `<lastmod>` is now the date of the last commit (or, on pages that list events, the day a past event dropped off), not the build date. Weekly rebuilds no longer mark every page as changed.
