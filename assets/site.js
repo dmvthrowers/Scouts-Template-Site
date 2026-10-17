@@ -6,10 +6,14 @@
   if (gate && load) {
     load.hidden = false;
     load.addEventListener("click", function () {
+      // Only a Google Calendar embed address is ever put in the frame.
+      var src;
+      try { src = new URL(gate.getAttribute("data-src"), location.href); } catch (e) { return; }
+      if (src.protocol !== "https:" || src.hostname !== "calendar.google.com" || src.pathname.indexOf("/calendar/") !== 0) return;
       var frame = document.createElement("iframe");
       frame.className = "cal-frame";
       frame.title = "Calendar";
-      frame.src = gate.getAttribute("data-src");
+      frame.src = src.href;
       gate.replaceWith(frame);
       frame.focus();
     });
