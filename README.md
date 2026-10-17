@@ -190,7 +190,38 @@ page also gets an **Add it to your Google Calendar** link (it needs the calendar
 
 **Download-to-calendar file.** Whatever Google Calendar says, the Calendar page also offers **Add these events to
 your calendar (.ics)** whenever you have dated upcoming events in `site.jsonc`. It is built from `events`, as
-all-day events, so there is nothing extra to maintain. Events without a date, and events that have passed, are left out.
+all-day events (events pulled from Google Calendar, below, keep their start and end times), so there is nothing extra to maintain. Events without a date, and events that have passed, are left out.
+
+### Events from Google Calendar (optional)
+
+Instead of typing events into `site.jsonc`, the site can read your Google Calendar every morning and list the
+upcoming ones, with times, on the Calendar page and the home page. They also go into the `.ics` download and the
+Event data for search engines. Visitors never contact Google: the pull happens when the site is built.
+
+1. In Google Calendar, open the calendar's **Settings and sharing**, then **Integrate calendar**, and copy the
+   **Secret address in iCal format**. This works even when the calendar is not public. Treat it like a password:
+   anyone with it can read the calendar.
+2. In your GitHub repository, go to **Settings > Secrets and variables > Actions > New repository secret**. Name it
+   `CALENDAR_ICS_URL` and paste the address.
+3. Optional: on the **Variables** tab add `CALENDAR_TZ` (for example `America/New_York`). Without it, times show as
+   the calendar wrote them.
+4. Run **Actions > Build and deploy > Run workflow**, or wait for the next morning. Change an event in Google
+   Calendar and the site follows within a day.
+
+What gets published, and what doesn't:
+
+- Only the **title, date, time and place** of each event. Repeating events are expanded (every 1st and 3rd Thursday,
+  and so on), including moved and cancelled ones.
+- A description stays on the calendar unless it starts with `Public:`. Then the rest is shown on the site, so
+  `Public: Bring your handbook and a pencil.` works and a leader's phone number in the notes does not leak.
+- Events marked **Private** or **Confidential**, and cancelled events, are skipped.
+- Places are hidden by default, in case one is a family's home. Set `"calendar": { "show_places": true }` to show them.
+- An event in `site.jsonc` replaces any calendar event on the same day, so you can word a special day your own way.
+
+If the secret is missing, wrong, or Google is down, the sync prints a short note and the site builds from
+`site.jsonc` alone. It never fails the deploy and never prints the address. To try it by hand:
+`CALENDAR_ICS_URL="https://..." python3 scripts/sync_calendar.py`, then `python3 build.py` (it writes the gitignored
+`events.generated.json`; `--file my.ics` reads a saved copy, and `--days 90` changes how far ahead to look).
 
 ---
 
@@ -381,7 +412,8 @@ assets/                 ← copied to the site as-is
 content/                ← optional extra HTML for any page
 build.py                ← builds _site/ from all of the above (standard Python, no installs)
 scripts/check_site.py   ← checks the built site (links, accessibility, security)
-.github/workflows/deploy.yml  ← builds, checks, and publishes on every change, plus weekly
+scripts/sync_calendar.py ← optional: pulls upcoming events from Google Calendar before each build
+.github/workflows/deploy.yml  ← builds, checks, and publishes on every change, plus daily
 vercel.json             ← build settings if you host on Vercel (ignored elsewhere)
 AGENTS.md               ← instructions for AI coding agents
 DEPLOY.md               ← your group's maintenance checklist: who looks after the site, what's left to do (fill it in)

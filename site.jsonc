@@ -114,7 +114,11 @@
   // Google Calendar (optional). Paste the "embed" URL from Google Calendar settings:
   // Settings and sharing > Integrate calendar > Embed code (just the https://... part).
   // The calendar must be public. Leave "" to show only the events list.
-  "calendar": { "embed_url": "" },
+  "calendar": {
+    "embed_url": ""
+    // To list the calendar's events on the site automatically, see "Events from Google Calendar" in the README.
+    // , "show_places": false   // true: also show each event's place from the calendar (leave off if any are home addresses)
+  },
 
   // Photo rules. The gallery stays empty until you confirm permission.
   "photos": {

@@ -85,7 +85,8 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
 - **Smoke test:** `scripts/smoke_test.js` and `.github/workflows/smoke-test.yml` click through every page of the built showcase
   and its examples at phone width. They only run in the original template repository. Run it after changing `build.py`
   or `assets/`: `python3 scripts/build_showcase.py && node scripts/smoke_test.js` (needs Node and Playwright).
-- **No dependencies:** keep `build.py` and `scripts/check_site.py` standard-library Python 3.9+.
+- **Calendar sync:** `scripts/sync_calendar.py` pulls events from a Google Calendar feed into the gitignored `events.generated.json`, which `build.py` merges. It publishes only title, date, time and place (a description only after `Public:`). Run `python3 -m unittest discover -s scripts -p "test_*.py"` after changing it.
+- **No dependencies:** keep `build.py`, `scripts/check_site.py` and `scripts/sync_calendar.py` standard-library Python 3.9+.
 
 ## Useful commands
 ```sh
