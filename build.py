@@ -15,6 +15,7 @@ How it fits together:
   build.py          this file: one small function per page, near the bottom
 """
 import argparse
+import base64
 import datetime as dt
 import html
 import http.server
@@ -27,7 +28,7 @@ import subprocess
 import sys
 import zlib
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "_site"
@@ -443,6 +444,39 @@ class Site:
                     when = d + dt.timedelta(days=1)
         return min(when, self.today)
 
+    def events_ics(self):
+        """The dated upcoming events as an iCalendar (.ics) file, or "" when there are none. Events are all-day,
+        because the settings hold only a date and free text; tell families to check details with the leaders."""
+        dated = [(d, e) for d, e in self.events() if d]
+        if not dated:
+            return ""
+        def text(t):
+            return str(t).replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,").replace("\r", "").replace("\n", "\\n")
+        def fold(line):                                              # lines are at most 75 bytes; continuations start with a space
+            out, cur = [], ""
+            for ch in line:
+                if len((cur + ch).encode()) > (75 if not out else 74):
+                    out.append(cur)
+                    cur = ch
+                else:
+                    cur += ch
+            out.append(cur)
+            return "\r\n ".join(out)
+        host = urlparse(self.base_url).netloc or "site.invalid"
+        stamp = f"{self.today:%Y%m%d}T000000Z"
+        lines = ["BEGIN:VCALENDAR", "VERSION:2.0", f"PRODID:-//{text(self.name)}//Youth Group Site Template//EN",
+                 "CALSCALE:GREGORIAN", "METHOD:PUBLISH", f"X-WR-CALNAME:{text(self.name)}"]
+        for d, e in dated:
+            slug = re.sub(r"[^a-z0-9]+", "-", e["title"].lower()).strip("-") or "event"
+            lines += ["BEGIN:VEVENT", f"UID:{d:%Y%m%d}-{slug}@{host}", f"DTSTAMP:{stamp}",
+                      f"DTSTART;VALUE=DATE:{d:%Y%m%d}", f"DTEND;VALUE=DATE:{d + dt.timedelta(days=1):%Y%m%d}",
+                      f"SUMMARY:{text(e['title'])}"]
+            if e.get("details"):
+                lines.append(f"DESCRIPTION:{text(e['details'])}")
+            lines.append("END:VEVENT")
+        lines.append("END:VCALENDAR")
+        return "\r\n".join(fold(x) for x in lines) + "\r\n"
+
     def event_list(self, limit=None):
         items = self.events(limit)
         if not items:
@@ -706,9 +740,25 @@ class Site:
             if not embed.startswith("https://calendar.google.com/"):
                 warnings.append("calendar.embed_url should start with https://calendar.google.com/ (ignored).")
             else:
-                frame = (f'<iframe class="cal-frame" title="{esc(self.name)} calendar" src="{esc(embed)}" loading="lazy"></iframe>\n'
+                # The Google Calendar frame loads only after a click (assets/site.js), so no page contacts Google
+                # until a visitor asks. Without JavaScript the button stays hidden and the plain link still works.
+                cal_id = (parse_qs(urlparse(embed).query).get("src") or [""])[0]
+                add = ""
+                if cal_id:
+                    cid = base64.b64encode(cal_id.encode()).decode().rstrip("=")
+                    add = (f'\n      <p class="muted">Want it with your own calendars? '
+                           f'{ext_link("https://calendar.google.com/calendar/u/0?cid=" + cid, "Add it to your Google Calendar")}.</p>')
+                frame = (f'<div class="cal-gate" id="cal-gate" data-src="{esc(embed)}">\n'
+                         f'      <h3>Full Calendar</h3>\n'
+                         f'      <p>The full calendar is hosted by Google. To keep this site free of outside services, it loads only when you ask for it.</p>\n'
+                         f'      <p class="btn-row"><button type="button" class="btn btn-primary" id="cal-load" hidden>Show the Calendar</button>\n'
+                         f'        {ext_link(embed, "Open in Google Calendar").replace("<a ", "<a class=" + chr(34) + "btn btn-outline" + chr(34) + " ", 1)}</p>{add}\n'
+                         f'    </div>\n'
                          f'    <p class="muted center">Calendar not loading? '
                          + (f'Email {self.mail()} for dates.' if self.email() else 'Ask a leader at a meeting for dates.') + '</p>')
+        ics = ""
+        if self.events_ics():
+            ics = ('<p><a class="btn btn-outline" href="calendar.ics" download>Add these events to your calendar (.ics)</a></p>')
         season = f' We meet {esc(c["meetings"]["season"])}.' if c["meetings"].get("season") else ""
         mtgs = self.terms.get("meetings", "meetings")
         body = f"""{self.page_head("Calendar", f"{mtgs.capitalize()}, events, and activities.")}
@@ -719,6 +769,7 @@ class Site:
     <p><strong>{esc(c["meetings"]["summary"])}</strong> at {esc(c["meetings"]["location"])}.{season}</p>
     <h2>Upcoming Events</h2>
     {self.event_list()}
+    {ics}
     {frame}
   </div>
 </section>"""
@@ -980,6 +1031,8 @@ class Site:
             if slug != "404":
                 summaries.append((slug, title, desc))
         (OUT / "llms.txt").write_text(self.llms_txt(summaries), encoding="utf-8")
+        if self.events_ics():
+            (OUT / "calendar.ics").write_bytes(self.events_ics().encode())
         robots = "User-agent: *\nAllow: /\n"
         if self.base_url:
             robots += f"\nSitemap: {self.base_url}sitemap.xml\n"

@@ -45,6 +45,12 @@ jobs:
             python3 build.py
             python3 scripts/check_site.py --real
           fi
+      # The W3C Nu HTML Checker (the validator behind validator.w3.org), errors only: a green run means no invalid
+      # markup, such as an element in the wrong place or a skipped heading level. Uses the Java on ubuntu-latest.
+      - name: Validate the HTML
+        run: |
+          npm install --prefix "$RUNNER_TEMP/vnu" --no-audit --no-fund vnu-jar@26.10.7
+          java -jar "$RUNNER_TEMP/vnu/node_modules/vnu-jar/build/dist/vnu.jar" --errors-only --skip-non-html $(find _site -name '*.html')
       - name: Package the site
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
